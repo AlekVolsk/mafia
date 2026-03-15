@@ -475,9 +475,6 @@ button.warning:hover {
     background-color: var(--ui-bg-page);
 }
 
-.timer-card {
-    background-color: var(--ui-bg-page);
-}
 
 .cards-container.custom-back .card.back {
     background-image: var(--custom-back);
@@ -814,10 +811,6 @@ button.warning:hover {
     color: var(--ui-text-subtle);
 }
 
-.footer-hint {
-    text-align: center;
-    margin: 0 0 24px;
-}
 
 .footer-rules-btns {
     display: flex;
@@ -830,17 +823,7 @@ button.warning:hover {
 }
 
 .rules-btn {
-    padding: 8px 20px;
-    border-radius: 8px;
-    border: 1px solid var(--ui-border);
-    background: var(--ui-btn);
-    color: var(--ui-text);
     font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.rules-btn:hover {
-    background: var(--ui-btn-hover);
 }
 
 .dialog-body .roles-dl {
@@ -984,17 +967,7 @@ button.warning:hover {
 }
 
 .dialog-close-btn {
-    padding: 8px 20px;
-    border-radius: 8px;
-    border: none;
-    background: var(--ui-btn);
-    color: var(--ui-text);
     font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.dialog-close-btn:hover {
-    background: var(--ui-btn-hover);
 }
 
 /* RTL */
