@@ -1,0 +1,1044 @@
+:root {
+    --ui-bg-page: #1a1e2b;
+    --ui-bg-container: #252b3d;
+    --ui-bg-panel: #1e2333;
+    --ui-bg-element: #2b3245;
+    --ui-bg-element-hover: #374153;
+    --ui-border: #3f4a5e;
+    --ui-border-card: #4a5268;
+
+    --ui-text: #e0e0e0;
+    --ui-text-muted: #8f9bb3;
+    --ui-text-subtle: #7f8c9f;
+    --ui-text-badge: #b4c2d9;
+
+    --ui-accent: #c0a062;
+    --ui-accent-hover: #d4b37a;
+
+    --ui-btn-default: #3f4a5e;
+    --ui-btn-hover: #5c6b84;
+    --ui-btn-danger: #8f3b3b;
+    --ui-btn-danger-hover: #b14b4b;
+    --ui-btn-reset-back: #4a3f3f;
+
+    --color-danger: #8f1508;
+    --color-warning: #f5c800;
+    --color-positive: #79ae2c;
+
+    --card-peaceful-bg: var(--color-danger);
+    --card-peaceful-fg: var(--ui-text);
+
+    --card-mafia-bg: #1e1e1e;
+    --card-mafia-fg: #dd5b4e;
+
+    --card-commissar-bg: #005a95;
+    --card-commissar-fg: var(--ui-text);
+
+    --card-doctor-bg: var(--ui-text);
+    --card-doctor-fg: var(--color-danger);
+
+    --card-maniac-bg: var(--color-positive);
+    --card-maniac-fg: #1e1e1e;
+
+    --card-escort-bg: var(--color-danger);
+    --card-escort-fg: #1e1e1e;
+
+    --card-jester-bg: #b79500;
+    --card-jester-fg: var(--ui-text);
+
+    --card-journalist-bg: var(--color-warning);
+    --card-journalist-fg: var(--color-danger);
+
+    --card-back-dark: #1e1510;
+    --card-back-mid: #5a4a3a;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans', Arial, sans-serif;
+}
+
+body {
+    background: var(--ui-bg-page);
+    color: var(--ui-text);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--ui-text-badge);
+}
+
+.game-container {
+    width: 100%;
+    background: var(--ui-bg-container);
+    border-radius: 32px;
+    padding: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--ui-border);
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h1 #pageTitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--ui-border);
+    padding: 6px 18px 6px 10px;
+    border-radius: 40px;
+    color: var(--ui-text-badge);
+}
+
+h1 #pageTitle img {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    flex-shrink: 0;
+}
+
+.lang-switcher {
+    margin-inline-start: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-end;
+    max-width: 50%;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 4px;
+    cursor: pointer;
+    box-shadow: none;
+    opacity: 0.35;
+    transition: opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.lang-btn svg {
+    width: 30px;
+    height: 20px;
+    display: block;
+    border-radius: 2px;
+}
+
+.lang-btn:hover:not(.active) {
+    background: none;
+    opacity: 0.7;
+}
+
+.lang-btn.active {
+    opacity: 1;
+    cursor: default;
+    pointer-events: none;
+}
+
+.roles-note {
+    margin: 6px 0 10px;
+    font-size: 0.8rem;
+    color: var(--ui-text-muted);
+    line-height: 1.5;
+}
+
+.site-desc {
+    margin: 0 0 24px;
+    font-size: 1.2rem;
+    color: var(--ui-text);
+    line-height: 1.6;
+}
+
+.settings-panel {
+    background: var(--ui-bg-panel);
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.setting-group {
+    min-width: 200px;
+}
+
+.setting-group.fw {
+    flex: 1;
+}
+
+.setting-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ui-text-muted);
+    margin-bottom: 8px;
+}
+
+.setting-group label svg {
+    width: 16px;
+    height: 16px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+input[type=range] {
+    width: 200px;
+    height: 6px;
+    background: var(--ui-border);
+    border-radius: 10px;
+    appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--ui-accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px black;
+}
+
+#playerCountValue {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--ui-accent);
+    min-width: 40px;
+}
+
+.mafia-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    background: var(--ui-bg-element);
+    padding: 8px 12px;
+    border-radius: 40px;
+    margin-top: 10px;
+    color: var(--ui-text-muted);
+}
+
+.mafia-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-danger);
+    transform: rotate(-45deg);
+}
+
+.checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ui-bg-element);
+    padding: 8px 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.checkboxes label:hover {
+    background: var(--ui-bg-element-hover);
+}
+
+input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--ui-accent);
+}
+
+button svg,
+label svg {
+    display: block;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0 16px;
+}
+
+#dealBtn,
+#revealAllBtn,
+#resetAllBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#likeBtn {
+    margin-inline-start: 48px;
+}
+
+#dislikeBtn {
+    margin-inline-end: 48px;
+}
+
+#resetAllBtn svg {
+    color: var(--color-danger);
+}
+
+#revealAllBtn svg {
+    color: var(--color-warning);
+}
+
+#likeBtn svg {
+    color: var(--color-positive);
+}
+
+#dislikeBtn svg {
+    color: var(--color-danger);
+}
+
+#timerBtn svg {
+    color: var(--ui-accent);
+}
+
+#likeBtn svg,
+#dislikeBtn svg,
+#timerBtn svg {
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+}
+
+button {
+    background: var(--ui-btn-default);
+    border: none;
+    color: var(--ui-text);
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+button.primary {
+    background: var(--ui-accent);
+    color: var(--ui-bg-panel);
+}
+
+button.primary:hover {
+    background: var(--ui-accent-hover);
+}
+
+button:hover {
+    background: var(--ui-btn-hover);
+}
+
+button.warning {
+    background: var(--ui-btn-danger);
+}
+
+button.warning:hover {
+    background: var(--ui-btn-danger-hover);
+}
+
+.upload-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-area input {
+    display: none;
+}
+
+.upload-area label {
+    background: var(--ui-bg-element);
+    padding: 8px 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ui-text-muted);
+}
+
+.upload-area label svg {
+    width: 16px;
+    height: 16px;
+    color: var(--ui-accent);
+}
+
+.upload-area label:hover {
+    background: var(--ui-bg-element-hover);
+}
+
+#resetBackBtn {
+    background: var(--ui-btn-reset-back);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: var(--color-danger);
+}
+
+#resetBackBtn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.cards-wrapper {
+    background: var(--ui-bg-page);
+    border-radius: 32px;
+    padding: 24px;
+    margin-top: 16px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    width: 260px;
+    height: 360px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 24px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 3px solid var(--ui-border-card);
+    background-color: var(--ui-bg-element);
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.8);
+    border-color: var(--ui-accent);
+}
+
+.card.back,
+.timer-card {
+    background-image:
+        repeating-linear-gradient(45deg, rgba(192, 160, 98, 0.2) 0px, rgba(192, 160, 98, 0.2) 10px,
+            rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 20px),
+        radial-gradient(circle at 30% 30%, var(--card-back-mid), var(--card-back-dark));
+    background-blend-mode: overlay;
+    background-color: var(--ui-bg-page);
+}
+
+.timer-card {
+    background-color: var(--ui-bg-page);
+}
+
+.cards-container.custom-back .card.back {
+    background-image: var(--custom-back);
+    background-blend-mode: normal;
+}
+
+.card.back.seen {
+    cursor: default;
+}
+
+.card.back.seen .card-number {
+    color: rgba(150, 150, 150, 0.5);
+    text-shadow: none;
+}
+
+.card-number,
+.card .role-letter,
+.card .role-name {
+    display: none;
+}
+
+.card.back .card-number {
+    display: block;
+    font-size: 10rem;
+    font-weight: bold;
+    color: rgba(192, 160, 98, 0.85);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    line-height: 1;
+}
+
+.all-visible .card:not(.back) .card-number {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--ui-accent);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.all-visible .card:not(.back) .role-letter {
+    display: block;
+    font-size: 11rem;
+    line-height: 1;
+    margin-bottom: 24px;
+}
+
+.all-visible .card:not(.back) .role-name {
+    display: block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 4px 14px;
+    border-radius: 30px;
+    color: inherit;
+}
+
+.peaceful {
+    background-color: var(--card-peaceful-bg);
+    color: var(--card-peaceful-fg);
+}
+
+.mafia {
+    background-color: var(--card-mafia-bg);
+    color: var(--card-mafia-fg);
+}
+
+.don {
+    background-color: var(--card-mafia-bg);
+    color: var(--card-mafia-fg);
+}
+
+.commissar {
+    background-color: var(--card-commissar-bg);
+    color: var(--card-commissar-fg);
+}
+
+.patrol {
+    background-color: var(--card-commissar-bg);
+    color: var(--card-commissar-fg);
+}
+
+.doctor {
+    background-color: var(--card-doctor-bg);
+    color: var(--card-doctor-fg);
+}
+
+.nurse {
+    background-color: var(--card-doctor-bg);
+    color: var(--card-doctor-fg);
+}
+
+.maniac {
+    background-color: var(--card-maniac-bg);
+    color: var(--card-maniac-fg);
+}
+
+.escort {
+    background-color: var(--card-escort-bg);
+    color: var(--card-escort-fg);
+}
+
+.jester {
+    background-color: var(--card-jester-bg);
+    color: var(--card-jester-fg);
+}
+
+.journalist {
+    background-color: var(--card-journalist-bg);
+    color: var(--card-journalist-fg);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-card {
+    height: 90vh;
+    width: calc(90vh * 13 / 18);
+    container-type: size;
+    border-radius: 48px;
+    border: 6px solid var(--ui-accent);
+    box-shadow: 0 30px 60px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    font-weight: bold;
+}
+
+.modal-card.timer-card {
+    background-color: var(--ui-bg-page);
+    cursor: default;
+    gap: 0;
+    justify-content: space-evenly;
+    padding: 6cqh 6cqw;
+}
+
+.timer-durations {
+    display: flex;
+    gap: 2cqw;
+    width: 100%;
+    justify-content: center;
+}
+
+.timer-durations button {
+    flex: 1;
+    padding: 2cqh 0;
+    font-size: 3cqh;
+    font-weight: 700;
+    border-radius: 4cqh;
+    box-shadow: none;
+    background: var(--ui-btn-default);
+    color: var(--ui-text);
+    justify-content: center;
+}
+
+.timer-durations button.active {
+    background: var(--ui-accent);
+    color: var(--ui-bg-panel);
+}
+
+.timer-durations button:hover:not(.active):not(:disabled) {
+    background: var(--ui-btn-hover);
+}
+
+.timer-durations button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.timer-display {
+    font-size: 27cqh;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--ui-text);
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s;
+}
+
+.timer-display.warn {
+    color: var(--color-warning);
+}
+
+.timer-display.danger {
+    color: var(--color-danger);
+}
+
+.timer-start-btn {
+    width: 100%;
+    padding: 1cqh 0;
+    font-size: 6cqh;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 5cqh;
+    box-shadow: none;
+    background: var(--ui-btn-default);
+    color: var(--ui-text);
+    justify-content: center;
+}
+
+.timer-start-btn:hover {
+    background: var(--ui-btn-hover);
+}
+
+.modal-card.reroll-card {
+    background-color: var(--ui-bg-page);
+    cursor: default;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 5cqh 6cqw 5cqh;
+}
+
+.reroll-title {
+    font-size: 4.2cqh;
+    font-weight: 700;
+    text-align: center;
+    color: var(--ui-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 3cqh;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+.reroll-table {
+    width: 100%;
+    border-collapse: collapse;
+    flex: 1;
+}
+
+.reroll-table td {
+    font-size: 2.8cqh;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.5cqh 0;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--ui-text);
+}
+
+.reroll-table td:first-child {
+    text-align: right;
+    width: 30%;
+    color: var(--ui-text-muted, var(--ui-text));
+    opacity: 0.65;
+}
+
+.reroll-arrow {
+    text-align: center;
+    width: 20%;
+    color: var(--ui-accent);
+    font-family: inherit;
+    font-weight: 400;
+}
+
+.reroll-table td:last-child {
+    text-align: left;
+    width: 30%;
+}
+
+.modal-card.reaction-card svg {
+    width: 55cqh;
+    height: 55cqh;
+    color: var(--ui-text);
+    display: block;
+}
+
+.modal-card.reaction-card.like {
+    background-color: var(--color-positive);
+}
+
+.modal-card.reaction-card.dislike {
+    background-color: var(--color-danger);
+}
+
+.modal-card .card-number {
+    display: block;
+    font-size: 10cqh;
+    font-weight: bold;
+    color: var(--ui-accent);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    line-height: 1;
+    margin-bottom: 1cqh;
+}
+
+.modal-card .role-letter {
+    font-size: 45cqh;
+    line-height: 1;
+    margin-bottom: 5cqh;
+}
+
+.modal-card .role-name {
+    font-size: 5cqh;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 1cqh 4cqh;
+    border-radius: 10cqh;
+    color: inherit;
+}
+
+.modal-card .role-desc {
+    font-size: 2cqh;
+    line-height: 1.2;
+    text-align: center;
+    padding: 0 6cqh;
+    margin-top: 2cqh;
+    color: inherit;
+    opacity: 0.85;
+    font-weight: normal;
+}
+
+.footer-note {
+    margin-top: 24px;
+    color: var(--ui-text-subtle);
+}
+
+.footer-hint {
+    text-align: center;
+    margin: 0 0 24px;
+}
+
+.footer-rules-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid var(--ui-border);
+    border-bottom: 1px solid var(--ui-border);
+    padding: 16px 0;
+    justify-content: center;
+}
+
+.rules-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--ui-border);
+    background: var(--ui-btn);
+    color: var(--ui-text);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.rules-btn:hover {
+    background: var(--ui-btn-hover);
+}
+
+.dialog-body .roles-dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    align-items: baseline;
+}
+
+.dialog-body .roles-dl dt {
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--ui-text);
+}
+
+.dialog-body .roles-dl dd {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.role-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-inline-end: 2px;
+    flex-shrink: 0;
+}
+
+.role-dot.peaceful {
+    background-color: var(--card-mafia-fg);
+}
+
+.role-dot.mafia {
+    background-color: var(--card-mafia-bg);
+}
+
+.role-dot.don {
+    background-color: var(--card-mafia-bg);
+}
+
+.role-dot.commissar {
+    background-color: var(--card-commissar-bg);
+}
+
+.role-dot.patrol {
+    background-color: var(--card-commissar-bg);
+}
+
+.role-dot.doctor {
+    background-color: var(--card-doctor-bg);
+}
+
+.role-dot.nurse {
+    background-color: var(--card-doctor-bg);
+}
+
+.role-dot.maniac {
+    background-color: var(--card-maniac-bg);
+}
+
+.role-dot.escort {
+    background-color: var(--card-escort-bg);
+}
+
+.role-dot.jester {
+    background-color: var(--card-jester-bg);
+}
+
+.role-dot.journalist {
+    background-color: var(--card-journalist-bg);
+}
+
+#appDialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    max-width: min(1200px, 92vw);
+    width: 100%;
+    background: var(--ui-bg-panel);
+    color: var(--ui-text);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+#appDialog::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.dialog-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--ui-border);
+    background-color: rgba(255,255,255,.1);
+}
+
+.dialog-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.dialog-body {
+    padding: 20px 24px;
+    max-height: 65vh;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.dialog-body h3 {
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ui-text-muted);
+}
+
+.dialog-body p {
+    margin: 0 0 10px;
+}
+
+.dialog-body ul,
+.dialog-body ol {
+    margin: 0 0 10px;
+    padding-inline-start: 1.4em;
+}
+
+.dialog-body hr {
+    border: none;
+    border-top: 1px solid var(--ui-border);
+    margin: 16px 0;
+}
+
+.dialog-footer {
+    padding: 14px 24px;
+    border-top: 1px solid var(--ui-border);
+    background-color: rgba(255,255,255,.1);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dialog-close-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    background: var(--ui-btn);
+    color: var(--ui-text);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.dialog-close-btn:hover {
+    background: var(--ui-btn-hover);
+}
+
+/* RTL */
+
+[lang="ar"] *,
+[lang="fa"] * {
+    font-family: 'Noto Sans Arabic', 'Noto Sans', Arial, sans-serif;
+}
+
+[lang="he"] * {
+    font-family: 'Noto Sans Hebrew', 'Noto Sans', Arial, sans-serif;
+}
+
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+    unicode-bidi: plaintext;
+}
+
+.all-visible .card:not(.back) {
+    background-image: none !important;
+}
+
+.footer-c {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+    h1 {
+        flex-wrap: wrap;
+    }
+
+    .lang-switcher {
+        margin-inline-start: 0;
+        max-width: 100%;
+        justify-content: flex-start;
+    }
+
+    .dialog-body .roles-dl {
+        grid-template-columns: auto;
+    }
+
+    .dialog-body .roles-dl dt {
+        margin-top: .5rem;
+    }
+}

@@ -1,0 +1,153 @@
+{
+    "meta": {
+        "language": "French",
+        "dir": "ltr",
+        "support": "Une erreur de traduction ? Signalez-la sur GitHub",
+        "metaDescription": "Distributeur de rôles pour Mafia en visioconférence. Attribuez les rôles aux joueurs dans Zoom, Meet ou Teams. Gratuit et sans inscription.",
+        "metaKeywords": "jeu mafia, mafia en ligne, cartes de rôle, jeu en groupe, team building, jeu en visio, jeu zoom"
+    },
+    "common": {
+        "title": "Mafia (Werewolf)",
+        "playersLabel": "Nombre de joueurs (8–24)",
+        "optionalRolesLabel": "Rôles optionnels (max. 1)",
+        "rolesNote": "Le rôle de Commissaire est toujours inclus. Le nombre de mafieux (Don compris) est calculé automatiquement : 1 pour 3,5 joueurs.",
+        "uploadBackLabel": "Téléverser un dos de carte",
+        "dealBtn": "Distribuer les rôles",
+        "rerollBtn": "Ordre des joueurs",
+        "revealAllBtn": "Tout révéler",
+        "hideAllBtn": "Tout masquer",
+        "resetAllBtn": "Tout réinitialiser",
+        "mafiaCount": "Mafia : {n} (Don inclus)",
+        "footerHint": "Cliquez sur une carte pour l’agrandir. Cliquez de nouveau ou appuyez sur Échap pour fermer. Les cartes déjà vues apparaissent assombries.",
+        "alertTooManyRoles": "Erreur : trop de rôles sélectionnés ({roles}) pour {players} joueurs. Réduisez les rôles optionnels ou augmentez le nombre de joueurs.",
+        "alertDealFirst": "Distribuez d’abord les rôles",
+        "siteDesc": "Outil pour distribuer les cartes de rôle de Mafia en ligne. Permet d’assigner et de révéler les rôles aux joueurs pendant une visioconférence. Fonctionne avec tout service où l’ordre des caméras reste stable.",
+        "close": "Fermer"
+    },
+    "roleMeta": {
+        "peaceful": {
+            "name": "Civil",
+            "letter": "C",
+            "desc": "Rôle civil. Vote pendant la journée. L’objectif est d’identifier et d’éliminer la Mafia et le Maniaque. Même si la Mafia est éliminée, la partie continue tant que le Maniaque est encore en vie."
+        },
+        "mafia": {
+            "name": "Mafia",
+            "letter": "M",
+            "desc": "Traître. La nuit, choisit une victime avec le Don. Pendant la journée, se mêle aux civils."
+        },
+        "don": {
+            "name": "Don",
+            "letter": "D",
+            "desc": "Traître. Chef de la Mafia. La nuit, il enquête sur un joueur — l’animateur indique s’il s’agit du Commissaire (ou de la Patrouille) ou non."
+        },
+        "commissar": {
+            "name": "Commissaire",
+            "letter": "C",
+            "desc": "Rôle civil. La nuit, il enquête sur un joueur — l’animateur indique s’il appartient à la Mafia ou non. Si le Commissaire meurt, le rôle passe à la Patrouille (si elle est dans la partie et encore en vie)."
+        },
+        "patrol": {
+            "name": "Patrouille",
+            "letter": "P",
+            "desc": "Rôle civil. Se réveille avec le Commissaire et voit son enquête. La nuit, protège un joueur : si la Mafia vise ce joueur, la Patrouille meurt à sa place. Si le Commissaire meurt, la Patrouille devient le nouveau Commissaire et ne protège plus."
+        },
+        "doctor": {
+            "name": "Docteur",
+            "letter": "D",
+            "desc": "Rôle civil. Soigne un joueur chaque nuit (peut se soigner lui-même). Empêche un tir de la Mafia. Ne peut pas soigner la même personne deux nuits de suite ni plus de deux fois pendant la partie, y compris lui-même. Si le Maniaque est dans la partie, le Docteur peut aussi vérifier un joueur chaque nuit pour savoir s’il est le Maniaque — l’animateur montre une carte de réponse. Si le Docteur meurt, le rôle passe à l’Infirmière (si elle est dans la partie et encore en vie)."
+        },
+        "nurse": {
+            "name": "Infirmière",
+            "letter": "I",
+            "desc": "Rôle civil. Se réveille avec le Docteur et voit son choix. Si le Docteur meurt, l’Infirmière devient Docteur — y compris pour rechercher le Maniaque s’il est dans la partie. Elle ne peut pas se soigner elle-même ; les règles « pas deux nuits de suite » et « maximum deux soins par joueur pendant la partie » restent valables."
+        },
+        "maniac": {
+            "name": "Maniaque",
+            "letter": "M",
+            "desc": "Rôle indépendant. Tue n’importe quel joueur chaque nuit, sauf lui-même. Immunisé contre l’action de l’Escort. Si le Maniaque attaque l’Escort ou le joueur avec qui elle passe la nuit, les deux meurent. Il gagne s’il reste seul avec un autre joueur."
+        },
+        "escort": {
+            "name": "Escort",
+            "letter": "E",
+            "desc": "Rôle civil. Se réveille en premier chaque nuit. Passe la nuit avec un joueur : son action nocturne est bloquée et un tir de la Mafia contre lui échoue. Si elle passe la nuit avec un membre de la Mafia, la Mafia ne tue personne mais le Don effectue quand même son enquête. Si elle passe la nuit avec le Don, celui-ci ne fait pas d’enquête mais la Mafia tire quand même. L’action n’a aucun effet sur le Maniaque — s’il attaque, les deux meurent."
+        },
+        "jester": {
+            "name": "Bouffon",
+            "letter": "B",
+            "desc": "Rôle civil qui ne se réveille pas la nuit. Son objectif est d’être éliminé par vote pendant la journée. S’il est expulsé, il gagne immédiatement. S’il meurt la nuit, il est simplement éliminé sans victoire."
+        },
+        "journalist": {
+            "name": "Journaliste",
+            "letter": "J",
+            "desc": "Rôle civil. Se réveille la nuit avant le Maniaque. Désigne deux joueurs : l’animateur indique s’ils appartiennent à la même faction (tous les deux civils ou tous les deux Mafia), sans préciser laquelle."
+        }
+    },
+    "rules": {
+        "paragraphs": [
+            "<h3>Règles générales</h3>",
+            "Les joueurs se réunissent dans une salle en ligne qui permet le partage d’écran et les webcams. Les webcams sont obligatoires pour tous les participants sauf l’animateur : à la place, il partage son écran avec cet outil. Un joueur sans caméra devient un observateur silencieux sans droit de parole ni de vote. Le jeu repose sur la confiance : pas d’indices ni de spoilers en messages privés — seulement du jeu honnête dans l’appel commun. Pour distribuer les rôles selon l’ordre des caméras, il est préférable que la grille des participants soit identique pour tous. Des services comme <a href=\"https://vdo.ninja\" target=\"_blank\" rel=\"nofollow\">VDO.ninja</a>, <a href=\"https://butter.us\" target=\"_blank\" rel=\"nofollow\">Butter</a>, <a href=\"https://whereby.com\" target=\"_blank\" rel=\"nofollow\">Whereby</a>, <a href=\"https://zoom.us\" target=\"_blank\" rel=\"nofollow\">Zoom</a> ou d’autres plateformes similaires conviennent parfaitement.",
+            "Le nombre idéal de joueurs est entre <strong>8 et 24</strong>. Avec moins de huit joueurs, la partie est souvent moins intéressante ; avec plus de vingt-quatre, elle devient chaotique et peut durer très longtemps. Les rôles optionnels peuvent être adaptés à la taille du groupe : Patrouille et Infirmière sont souvent retirées avec moins de 15 joueurs, Journaliste et Bouffon avec moins de 20.",
+            "Pour créer une ambiance, le premier joueur peut inventer une courte histoire : où sommes-nous et pourquoi sommes-nous réunis aujourd’hui ? Par exemple : l’équipe part en voyage d’entreprise en Sicile — et c’est là que se déroule notre partie. Cette introduction se fait le premier jour et peut prendre un peu plus de temps.",
+            "<hr>",
+            "<h3>Première nuit</h3>",
+            "Tout le monde ferme les yeux — avec un masque, les mains ou une feuille de papier. L’essentiel est de ne pas regarder. L’animateur distribue les rôles selon l’ordre des caméras à l’écran. Idéalement, tous les joueurs voient la même grille. Dans les groupes expérimentés, on peut utiliser une autre méthode : l’animateur appelle chaque joueur à tour de rôle, le joueur annonce son numéro et l’animateur lui montre sa carte de rôle. Ensuite les groupes se reconnaissent : la Mafia et le Don se réveillent, se reconnaissent puis se rendorment ; ensuite le Commissaire et la Patrouille ; puis le Docteur et l’Infirmière.",
+            "<hr>",
+            "<h3>Premier jour</h3>",
+            "Les joueurs ouvrent les yeux et se présentent. Il n’y a pas d’élimination le premier jour — c’est une partie conviviale, pas un tournoi.",
+            "<hr>",
+            "<h3>Nuit</h3>",
+            "Tout le monde ferme les yeux. L’animateur réveille les rôles dans cet ordre : Escort → Mafia et Don → Commissaire et Patrouille → Docteur et Infirmière → Journaliste → Maniaque. Chaque joueur indique sa cible avec les doigts ou avec une carte portant son numéro. Les rôles nécessitant une réponse d’information (Commissaire, Don, Docteur, Journaliste) reçoivent une carte de réponse : oui ou non.",
+            "<hr>",
+            "<h3>Jour</h3>",
+            "L’animateur annonce les résultats de la nuit. Optionnellement, un joueur éliminé peut laisser un dernier message — version « douce » (30 secondes) ou « hardcore » (5 secondes). Ensuite, discussion ouverte possible de 1 à 3 minutes. Puis les joueurs nominent chacun à leur tour un candidat en annonçant son numéro ou son nom. Chaque joueur dispose exactement d’une minute. Le vote se fait à main levée lorsque l’animateur cite chaque candidat. Le joueur avec le plus de voix est éliminé. Si personne n’est nominé, la journée se termine sans élimination.",
+            "<hr>",
+            "<h3>Fautes</h3>",
+            "Interrompre un joueur hors de la discussion générale est interdit et entraîne une faute. Trois fautes : le joueur perd son droit de parole et ne peut que nominer sans explication. Quatre fautes : exclusion de la table sans vote. Un joueur qui ouvre les yeux la nuit au mauvais moment est considéré comme tué par la Mafia. Les événements nocturnes non prévus par les règles ne doivent pas être discutés pendant la journée — cela entraîne aussi une faute.",
+            "<hr>",
+            "<strong>Victoire des civils</strong> — toute la Mafia <em>et</em> le Maniaque sont éliminés. <strong>Victoire de la Mafia</strong> — le nombre de mafieux est égal ou supérieur à celui des civils (le Maniaque compte comme civil). <strong>Victoire du Maniaque</strong> — il reste seul avec un autre joueur. <strong>Victoire du Bouffon</strong> — le Bouffon est éliminé par vote pendant la journée."
+        ],
+        "gameplayTitle": "Règles et déroulement du jeu",
+        "rolesTitle": "Description des rôles",
+        "hostTitle": "Pour l'animateur",
+        "hostParagraphs": [
+            "<h3>Preparación</h3>",
+            "Antes de comenzar, asegúrese de que todos los jugadores tengan sus cámaras web encendidas y claramente visibles. Los jugadores deben sentarse de modo que su rostro y manos estén dentro del encuadre. Esto es necesario para controlar el cumplimiento de las reglas durante la fase nocturna. Un jugador sin cámara solo puede participar como observador sin derecho a hablar ni votar.",
+            "Verifique el orden de los jugadores en la cuadrícula de la videoconferencia. Si el orden se muestra de forma diferente para algunos participantes, acuerden de antemano cómo se repartirán los roles (por ejemplo, según la numeración anunciada por el moderador).",
+            "Antes de comenzar la partida:",
+            "<ul><li>anuncie los números de los jugadores;</li><li>asegúrese de que cada jugador recuerde su número;</li><li>prepare tarjetas de respuesta para los roles informativos («sí» / «no»);</li><li>si es necesario, prepare música para las fases nocturnas;</li><li>verifique que la función de compartir pantalla funcione correctamente.</li></ul>",
+            "<hr>",
+            "<h3>Reparto de roles</h3>",
+            "Durante la primera noche reparta los roles estrictamente según el orden previamente acordado de los jugadores. Muestre la tarjeta de forma que solo el jugador correspondiente pueda verla. Dé unos segundos para leer el rol — esto es especialmente importante para los principiantes.",
+            "Después de repartir los roles, presente entre sí a los grupos que deben conocerse:",
+            "<ol><li>mafia y don</li><li>comisario y patrullero</li><li>doctor y enfermera</li></ol>",
+            "Cada grupo abre los ojos solo durante el momento de reconocimiento.",
+            "<hr>",
+            "<h3>Fase nocturna</h3>",
+            "Despierte los roles siempre en el mismo orden:",
+            "<ol><li>escort</li><li>mafia y don</li><li>comisario y patrullero</li><li>doctor y enfermera</li><li>periodista</li><li>maniac</li></ol>",
+            "Los jugadores muestran su elección con los dedos o con una tarjeta con el número del jugador. El moderador registra las acciones y no debe dar pistas no verbales.",
+            "<hr>",
+            "<h3>Fase diurna</h3>",
+            "Anuncie solo los hechos:",
+            "<ul><li>quién fue asesinado durante la noche;</li><li>si nadie murió — anúncielo.</li></ul>",
+            "No comente lo que ocurre ni dé pistas a los jugadores. El moderador debe permanecer neutral.",
+            "Controle el tiempo:",
+            "<ul><li>intervención del jugador — hasta <strong>1 minuto</strong>;</li><li>discusión — según el acuerdo del grupo;</li><li>votación — sucesivamente por cada jugador propuesto.</li></ul>",
+            "<hr>",
+            "<h3>Control de reglas</h3>",
+            "Esté atento a las infracciones:",
+            "<ul><li>interrumpir a quien está hablando;</li><li>discutir eventos nocturnos que un jugador no podría conocer;</li><li>gestos o señales durante la noche;</li><li>abrir los ojos o mirar.</li></ul>",
+            "Dé faltas según las reglas. En mesas grandes es especialmente importante controlar el tiempo de intervención.",
+            "<hr>",
+            "<h3>Principio principal</h3>",
+            "El moderador es <strong>árbitro y director del juego</strong>. Su tarea es mantener el ritmo, hacer cumplir las reglas y no influir en las decisiones de los jugadores.",
+            "Una conducción clara y tranquila hace que el juego sea interesante para todo el equipo."
+        ]
+    },
+    "timer": {
+        "start": "Démarrer",
+        "stop": "Arrêter"
+    },
+    "reroll": {
+        "title": "Réorganiser les joueurs"
+    }
+}

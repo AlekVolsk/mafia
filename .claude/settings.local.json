@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(grep -n \"uploadBackLabel\" /home/alek/mafia.local/lang/*.json)",
+      "Bash(grep -n \"playersLabel\" /home/alek/mafia.local/lang/*.json)",
+      "Bash(grep -n \"mafiaCount\" /home/alek/mafia.local/lang/*.json)",
+      "Bash(python3 -:*)",
+      "Bash(python3 /dev/stdin:*)",
+      "Bash(grep -n \"siteDesc\" /home/alek/mafia.local/lang/*.json)",
+      "Bash(python3 -c \":*)",
+      "Bash(wait)",
+      "Bash(ls /home/alek/mafia.local/assets/fonts/NotoSans/*.woff2)",
+      "Bash(grep -c \"\\\\.0\\\\.woff2$\" /tmp/font_urls.txt)",
+      "Bash(grep \"\\\\.0\\\\.woff2$\" /tmp/font_urls.txt)",
+      "Bash(chmod +x /tmp/download_fonts.sh)",
+      "Bash(/tmp/download_fonts.sh)",
+      "Bash(php /home/alek/mafia.local/tests/test_i18n_structure.php)",
+      "Bash(UA=\"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\")",
+      "Bash(head -5 grep -o \"https://[^\\)]*\" /home/alek/mafia.local/assets/fonts/NotoSans/hebrew.css)",
+      "Bash(head -5 grep -o \"https://[^\\)]*\" /home/alek/mafia.local/assets/fonts/NotoSans/devanagari.css)"
+    ]
+  }
+}

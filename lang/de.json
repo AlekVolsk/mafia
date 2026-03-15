@@ -1,0 +1,153 @@
+{
+    "meta": {
+        "language": "German",
+        "dir": "ltr",
+        "support": "Fehler in der Übersetzung gefunden? Auf GitHub melden",
+        "metaDescription": "Online-Rollenverteiler für Mafia über Videoanrufe. Teile Rollenkarten an Spieler in Zoom, Meet oder Teams. Kostenlos, ohne Registrierung.",
+        "metaKeywords": "Mafia Spiel, Mafia online, Rollenkarten, Partyspiel, Teambuilding Spiel, Videoanruf Spiel, Zoom Spiel"
+    },
+    "common": {
+        "title": "Mafia (Werwolf)",
+        "playersLabel": "Spieleranzahl (8–24)",
+        "optionalRolesLabel": "Optionale Rollen (max. 1)",
+        "rolesNote": "Die Rolle des Kommissars ist immer enthalten. Die Anzahl der Mafia (einschließlich Don) wird automatisch berechnet: eine Mafia pro 3,5 Spieler.",
+        "uploadBackLabel": "Kartenrückseite hochladen",
+        "dealBtn": "Rollen austeilen",
+        "rerollBtn": "Spielerreihenfolge",
+        "revealAllBtn": "Alle aufdecken",
+        "hideAllBtn": "Alle verbergen",
+        "resetAllBtn": "Alles zurücksetzen",
+        "mafiaCount": "Mafia: {n} (einschließlich Don)",
+        "footerHint": "Klicke auf eine Karte, um sie vergrößert zu sehen. Noch einmal klicken oder Esc drücken, um zu schließen. Bereits angesehene Karten werden abgedunkelt.",
+        "alertTooManyRoles": "Fehler: Zu viele Rollen ausgewählt ({roles}) für {players} Spieler. Reduziere die optionalen Rollen oder erhöhe die Spielerzahl.",
+        "alertDealFirst": "Bitte zuerst die Rollen austeilen",
+        "siteDesc": "Online-Rollenkarten-Verteiler für Mafia — teile und enthülle Rollen für Spieler direkt während eines Videoanrufs. Funktioniert in jeder Konferenz, in der die Webcam-Reihenfolge gleich bleibt.",
+        "close": "Schließen"
+    },
+    "roleMeta": {
+        "peaceful": {
+            "name": "Zivilist",
+            "letter": "Z",
+            "desc": "Zivilistenrolle. Stimmt tagsüber ab. Ziel ist es, Mafia und Maniak zu finden und zu eliminieren. Selbst wenn die Mafia besiegt ist, geht das Spiel weiter, solange der Maniak noch lebt."
+        },
+        "mafia": {
+            "name": "Mafia",
+            "letter": "M",
+            "desc": "Verräter. Wählt nachts zusammen mit dem Don ein Opfer. Tagsüber tarnt sie sich unter den Zivilisten."
+        },
+        "don": {
+            "name": "Don",
+            "letter": "D",
+            "desc": "Verräter. Anführer der Mafia. Überprüft nachts einen Spieler — der Spielleiter sagt, ob es sich um den Kommissar (oder die Patrouille) handelt oder nicht."
+        },
+        "commissar": {
+            "name": "Kommissar",
+            "letter": "K",
+            "desc": "Zivilistenrolle. Überprüft nachts einen Spieler — der Spielleiter sagt, ob er zur Mafia gehört oder nicht. Stirbt der Kommissar, geht die Rolle an die Patrouille über (falls sie im Spiel ist und noch lebt)."
+        },
+        "patrol": {
+            "name": "Patrouille",
+            "letter": "P",
+            "desc": "Zivilistenrolle. Wacht zusammen mit dem Kommissar auf und sieht dessen Überprüfung. Schützt nachts einen Spieler: Wenn die Mafia diesen Spieler angreift, stirbt die Patrouille stattdessen. Stirbt der Kommissar, wird die Patrouille zum neuen Kommissar und schützt nicht mehr."
+        },
+        "doctor": {
+            "name": "Arzt",
+            "letter": "A",
+            "desc": "Zivilistenrolle. Heilt jede Nacht einen Spieler (auch sich selbst). Verhindert einen Mafia-Schuss. Dieselbe Person darf nicht zwei Nächte hintereinander und insgesamt höchstens zweimal pro Spiel geheilt werden, einschließlich sich selbst. Wenn der Maniak im Spiel ist, überprüft der Arzt zusätzlich jede Nacht einen Spieler auf den Maniaken — der Spielleiter zeigt eine Ja-oder-Nein-Karte. Stirbt der Arzt, übernimmt die Krankenschwester seine Rolle (falls sie im Spiel ist und noch lebt)."
+        },
+        "nurse": {
+            "name": "Krankenschwester",
+            "letter": "K",
+            "desc": "Zivilistenrolle. Wacht zusammen mit dem Arzt auf und sieht seine Wahl. Stirbt der Arzt, wird die Krankenschwester zum Arzt, einschließlich der Suche nach dem Maniaken, falls dieser im Spiel ist. Kann sich nicht selbst heilen; die Regeln „nicht zwei Nächte hintereinander“ und „höchstens zweimal pro Spiel pro Spieler“ gelten weiterhin."
+        },
+        "maniac": {
+            "name": "Maniak",
+            "letter": "M",
+            "desc": "Unabhängige Rolle. Tötet jede Nacht einen beliebigen Spieler außer sich selbst. Immun gegen die Fähigkeit der Escort. Greift der Maniak die Escort oder den Spieler an, bei dem sie übernachtet hat, sterben beide. Gewinnt, wenn er mit einer anderen Person allein übrig bleibt."
+        },
+        "escort": {
+            "name": "Escort",
+            "letter": "E",
+            "desc": "Zivilistenrolle. Wacht jede Nacht als Erste auf. Verbringt die Nacht mit einem Spieler: dessen Nachtaktion wird blockiert, und ein Mafia-Schuss auf ihn schlägt fehl. Wenn sie die Nacht mit einem Mafia-Mitglied verbringt, tötet die Mafia niemanden, aber der Don führt trotzdem seine Überprüfung durch. Wenn sie die Nacht mit dem Don verbringt, führt der Don keine Überprüfung durch, aber die Mafia führt ihren Angriff aus. Auf den Maniaken hat sie keine Wirkung — greift der Maniak an, sterben beide."
+        },
+        "jester": {
+            "name": "Narr",
+            "letter": "N",
+            "desc": "Zivilistenrolle, die nachts nicht aufwacht. Ziel ist es, tagsüber von den Zivilisten hinausgewählt zu werden. Wird der Narr hinausgewählt, gewinnt er sofort. Stirbt er nachts, scheidet er einfach aus, ohne zu gewinnen."
+        },
+        "journalist": {
+            "name": "Journalist",
+            "letter": "J",
+            "desc": "Zivilistenrolle. Wacht nachts vor dem Maniaken auf. Zeigt auf zwei Spieler: der Spielleiter sagt, ob sie zur gleichen Fraktion gehören (beide Zivilisten oder beide Mafia), ohne zu sagen, welche."
+        }
+    },
+    "rules": {
+        "paragraphs": [
+            "<h3>Allgemeine Regeln</h3>",
+            "Die Spieler treffen sich in einem gemeinsamen Online-Raum, der Bildschirmfreigabe und Webcams unterstützt. Webcams sind für alle Teilnehmer Pflicht, außer für den Spielleiter: Statt einer Kamera teilt er seinen Bildschirm mit diesem Tool. Ein Spieler ohne Kamera wird zu einem stillen Beobachter ohne Rede- oder Stimmrecht. Das Spiel basiert auf Vertrauen: keine Hinweise oder Spoiler in privaten Nachrichten — spielt fair im gemeinsamen Gespräch. Damit die Rollenvergabe nach Webcam-Reihenfolge funktioniert, sollte das Teilnehmer-Raster bei allen gleich aussehen. Dafür eignen sich <a href=\"https://vdo.ninja\" target=\" _blank\" rel=\" nofollow\">VDO.ninja</a>, <a href=\"https://butter.us\" target=\" _blank\" rel=\" nofollow\">Butter</a>, <a href=\"https://whereby.com\" target=\" _blank\" rel=\" nofollow\">Whereby</a>, <a href=\"https://zoom.us\" target=\" _blank\" rel=\" nofollow\">Zoom</a> und ähnliche Konferenzdienste.",
+            "Die ideale Spielerzahl liegt bei <strong>8 bis 24</strong>. Weniger als acht ist meist wenig spannend, mehr als vierundzwanzig wird schnell chaotisch und kann das Spiel stundenlang dauern lassen. Optionale Rollen sollten zur Gruppengröße passen: Patrouille und Krankenschwester werden meist bei weniger als 15 Spielern weggelassen, Journalist und Narr bei weniger als 20. Die Balance kann jedoch jederzeit an eure Gruppe angepasst werden.",
+            "Um Stimmung zu schaffen, kann der erste Spieler eine kurze Geschichte erzählen: Wo befinden wir uns und warum sind wir heute hier? Zum Beispiel: Das Team macht eine Firmenreise nach Sizilien — und genau dort spielt unsere Partie. Diese Einführung findet am ersten Tag statt und darf etwas mehr Zeit bekommen.",
+            "<hr>",
+            "<h3>Erste Nacht</h3>",
+            "Alle schließen die Augen — mit einer Maske, den Händen oder einem Blatt Papier. Wichtig ist Ehrlichkeit und kein Spicken. Der Spielleiter verteilt die Rollen in der Reihenfolge der Webcams auf dem Bildschirm. Idealerweise sieht das Teilnehmer-Raster bei allen gleich aus. Für erfahrene Gruppen gibt es eine Alternative: Der Spielleiter ruft jeden Spieler nacheinander auf; der Spieler nennt seine Nummer, und der Spielleiter zeigt ihm still seine Rollenkarte. Danach lernen sich die Gruppen kennen: Mafia und Don wachen auf, erkennen sich gegenseitig und schlafen wieder ein; danach wachen Kommissar und Patrouille auf und schlafen wieder ein; anschließend Arzt und Krankenschwester — und schlafen wieder ein.",
+            "<hr>",
+            "<h3>Erster Tag</h3>",
+            "Die Spieler öffnen die Augen und stellen sich vor. Am ersten Tag gibt es keine Abstimmung — dies ist eine lockere Mafia-Runde und kein Turnier.",
+            "<hr>",
+            "<h3>Nacht</h3>",
+            "Alle schließen die Augen. Der Spielleiter weckt die Rollen der Reihe nach: Escort → Mafia & Don → Kommissar & Patrouille → Arzt & Krankenschwester → Journalist → Maniak. Jeder Spieler zeigt dem Spielleiter seine Wahl mit den Fingern oder mit einer vorbereiteten Karte mit gut sichtbarer Nummer. Rollen, deren Aktion eine Informationsantwort erfordert (Kommissar, Don, Arzt, Journalist), erhalten eine Reaktionskarte: Ja oder Nein.",
+            "<hr>",
+            "<h3>Tag</h3>",
+            "Der Spielleiter verkündet die Ergebnisse der Nacht. Optional darf ein nachts getöteter Spieler ein letztes Wort hinterlassen — entweder eine „sanfte“ Version (30 Sekunden für eine letzte Meinung) oder eine „Hardcore“-Version (5 Sekunden für eine letzte Nachricht). Danach kann optional eine offene Diskussion von 1–3 Minuten stattfinden. Anschließend nominieren die Spieler reihum einen Kandidaten, indem sie laut die Nummer oder den Spitznamen nennen. Jeder hat genau eine Minute — wer zu spät kommt, verpasst seine Chance. Die Abstimmung erfolgt per Handzeichen, wenn der Spielleiter jeden Nominierten aufruft. Der Spieler mit den meisten Stimmen scheidet aus. Wird niemand nominiert, endet der Tag ohne Ausscheiden und das Spiel geht in die Nacht über.",
+            "<hr>",
+            "<h3>Fouls</h3>",
+            "Einen anderen Spieler außerhalb der offenen Diskussion zu unterbrechen ist verboten und führt zu einem Foul. Drei Fouls: Der Spieler verliert seine Redezeit und darf nur noch nominieren ohne Begründung. Vier Fouls: Ausschluss vom Tisch ohne Abstimmung. Ein Spieler, der nachts zur falschen Zeit aufwacht, gilt als von der Mafia getötet. Ereignisse aus der Nacht, die nicht in den Regeln vorgesehen sind, dürfen tagsüber nicht diskutiert werden — Verstöße führen zu einem Foul. Auch Gesten eines „schlafenden“ Spielers in der Nacht sind nicht erlaubt — ebenfalls Foul. Bei großen Runden (meist mehr als 12 Spieler) können zusätzliche Fouls für das Überschreiten der Redezeit vergeben werden.",
+            "<hr>",
+            "<strong>Sieg der Zivilisten</strong> — alle Mafia-Mitglieder <em>und</em> der Maniak sind eliminiert. <strong>Sieg der Mafia</strong> — die Anzahl der Mafia ist gleich groß oder größer als die der Zivilisten (der Maniak zählt als Zivilist). <strong>Sieg des Maniaken</strong> — der Maniak bleibt mit einer anderen Person allein übrig. <strong>Sieg des Narren</strong> — der Narr wird an einem beliebigen Tag von den Zivilisten nominiert und hinausgewählt."
+        ],
+        "gameplayTitle": "Regeln und Spielablauf",
+        "rolesTitle": "Rollenübersicht",
+        "hostTitle": "Für den Spielleiter",
+        "hostParagraphs": [
+            "<h3>Vorbereitung</h3>",
+            "Stellen Sie vor Beginn sicher, dass bei allen Spielern die Webkameras eingeschaltet und gut sichtbar sind. Spieler sollten so sitzen, dass Gesicht und Hände im Bild zu sehen sind. Dies ist notwendig, um die Einhaltung der Regeln während der Nachtphase zu kontrollieren. Ein Spieler ohne Kamera kann nur als stiller Beobachter ohne Rede- und Stimmrecht teilnehmen.",
+            "Überprüfen Sie die Reihenfolge der Spieler im Videokonferenz-Raster. Wenn die Reihenfolge bei den Teilnehmern unterschiedlich angezeigt wird, vereinbaren Sie im Voraus, nach welchem Prinzip die Rollen verteilt werden (zum Beispiel nach der vom Spielleiter angekündigten Nummerierung).",
+            "Vor Spielbeginn:",
+            "<ul><li>verkünden Sie die Spielernummern;</li><li>stellen Sie sicher, dass sich jeder Spieler seine Nummer merkt;</li><li>bereiten Sie Reaktionskarten für Informationsrollen vor („ja“ / „nein“);</li><li>bereiten Sie bei Bedarf Hintergrundmusik für die Nachtphasen vor;</li><li>prüfen Sie die Bildschirmfreigabe.</li></ul>",
+            "<hr>",
+            "<h3>Rollenverteilung</h3>",
+            "Während der ersten Nacht verteilen Sie die Rollen strikt in der zuvor vereinbarten Reihenfolge der Spieler. Zeigen Sie die Karte so, dass sie nur der jeweilige Spieler sehen kann. Geben Sie ein paar Sekunden Zeit, um die Rolle zu lesen — das ist besonders wichtig für Neulinge.",
+            "Nachdem die Rollen verteilt wurden, stellen Sie die Gruppen einander vor, die sich kennen müssen:",
+            "<ol><li>Mafia und Don</li><li>Kommissar und Streife</li><li>Arzt und Krankenschwester</li></ol>",
+            "Jede Gruppe öffnet die Augen nur für die Dauer der Vorstellung.",
+            "<hr>",
+            "<h3>Nachtphase</h3>",
+            "Wecken Sie die Rollen jede Nacht in derselben Reihenfolge — das hilft den Spielern, sich besser zu orientieren:",
+            "<ol><li>Escort</li><li>Mafia und Don</li><li>Kommissar und Streife</li><li>Arzt und Krankenschwester</li><li>Journalist</li><li>Maniac</li></ol>",
+            "Die Spieler zeigen ihre Wahl mit Fingern oder mit einer Karte mit der Spielernummer. Der Spielleiter notiert die Aktionen und gibt keine nonverbalen Hinweise.",
+            "<hr>",
+            "<h3>Tagesphase</h3>",
+            "Verkündigen Sie nur die Fakten:",
+            "<ul><li>wer in der Nacht getötet wurde;</li><li>wenn niemand gestorben ist — teilen Sie dies mit.</li></ul>",
+            "Kommentieren Sie das Geschehen nicht und geben Sie den Spielern keine Hinweise. Der Spielleiter muss neutral bleiben.",
+            "Achten Sie auf das Timing:",
+            "<ul><li>Redezeit eines Spielers — bis zu <strong>1 Minute</strong>;</li><li>Diskussion — nach Vereinbarung des Teams;</li><li>Abstimmung — nacheinander über jeden nominierten Spieler.</li></ul>",
+            "<hr>",
+            "<h3>Regelkontrolle</h3>",
+            "Achten Sie auf Verstöße:",
+            "<ul><li>Unterbrechen eines sprechenden Spielers;</li><li>Diskussion über Nacht-Ereignisse, die ein Spieler nicht wissen konnte;</li><li>Gesten oder Hinweise in der Nacht;</li><li>Augen öffnen oder Spicken.</li></ul>",
+            "Verteilen Sie Fouls gemäß den Regeln. Bei großen Tischen ist es besonders wichtig, die Redezeit zu kontrollieren.",
+            "<hr>",
+            "<h3>Hauptprinzip</h3>",
+            "Der Spielleiter ist <strong>Schiedsrichter und Regisseur des Spiels</strong>. Seine Aufgabe ist es, das Tempo zu halten, die Regeln durchzusetzen und die Entscheidungen der Spieler nicht zu beeinflussen.",
+            "Eine klare und ruhige Leitung macht das Spiel für alle interessant."
+        ]
+    },
+    "timer": {
+        "start": "Start",
+        "stop": "Stop"
+    },
+    "reroll": {
+        "title": "Spielerreihenfolge mischen"
+    }
+}

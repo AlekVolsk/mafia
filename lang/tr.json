@@ -1,0 +1,153 @@
+{
+    "meta": {
+        "language": "Turkish",
+        "dir": "ltr",
+        "support": "Çeviride hata mı buldunuz? GitHub'da bildirin",
+        "metaDescription": "Video görüşmeleri için çevrimiçi Mafya rol dağıtıcısı. Zoom, Meet veya Teams üzerinden rolleri dağıtıp gösterin. Ücretsiz, kayıt gerekmez.",
+        "metaKeywords": "mafya oyunu, çevrimiçi mafya, rol kartları, parti oyunu, takım oyunu, video görüşmesi oyunu, Zoom oyunu"
+    },
+    "common": {
+        "title": "Mafya",
+        "playersLabel": "Oyuncu sayısı (8–24)",
+        "optionalRolesLabel": "İsteğe bağlı roller (maks. 1)",
+        "rolesNote": "Komiser rolü her zaman dahildir. Mafya (Don dahil) otomatik hesaplanır: her 3,5 oyuncu için 1.",
+        "uploadBackLabel": "Kart arkasını yükle",
+        "dealBtn": "Rolleri dağıt",
+        "rerollBtn": "Oyuncu sırası",
+        "revealAllBtn": "Hepsini göster",
+        "hideAllBtn": "Hepsini gizle",
+        "resetAllBtn": "Her şeyi sıfırla",
+        "mafiaCount": "Mafya: {n} (Don dahil)",
+        "footerHint": "Büyütmek için karta tıkla. Kapatmak için tekrar tıkla ya da Esc tuşuna bas. Görülen kart kararır.",
+        "alertTooManyRoles": "Hata: çok fazla rol seçildi ({roles}), ancak yalnızca {players} oyuncu var. İsteğe bağlı rolleri azalt ya da oyuncu sayısını artır.",
+        "alertDealFirst": "Önce rolleri dağıt",
+        "siteDesc": "Mafya için çevrimiçi rol kartı dağıtıcısı — video görüşmesinde her oyuncuya rol dağıtıp göstermenizi sağlar. Sabit kamera sırasına sahip tüm konferans odalarında çalışır.",
+        "close": "Kapat"
+    },
+    "roleMeta": {
+        "peaceful": {
+            "name": "Sivil",
+            "letter": "S",
+            "desc": "Barışçıl rol. Gündüzleri oy kullanır. Amaç: Mafya'yı ve Manyak'ı ortaya çıkarıp ortadan kaldırmak. Mafya yok edilse bile Manyak hayatta olduğu sürece oyun devam eder."
+        },
+        "mafia": {
+            "name": "Mafya",
+            "letter": "M",
+            "desc": "Hain. Geceleri Don ile birlikte bir kurban seçer. Gündüzleri sivillerin arasına karışır."
+        },
+        "don": {
+            "name": "Don",
+            "letter": "D",
+            "desc": "Hain. Mafya'nın lideri. Geceleri bir oyuncuyu sorgular — oyun yöneticisi o oyuncunun Komiser (veya Devriye) olup olmadığını söyler."
+        },
+        "commissar": {
+            "name": "Komiser",
+            "letter": "K",
+            "desc": "Barışçıl rol. Geceleri bir oyuncuyu sorgular — oyun yöneticisi o oyuncunun Mafya üyesi olup olmadığını söyler. Elenirse rol Devriye'ye geçer (eğer hayattaysa ve oyunda yer alıyorsa)."
+        },
+        "patrol": {
+            "name": "Devriye",
+            "letter": "D",
+            "desc": "Barışçıl rol. Komiser ile birlikte uyanır ve sorgulamayı görür. Geceleri bir oyuncuyu korur: Mafya o oyuncuyu hedef alırsa Devriye onun yerine ölür. Komiser elenirse Devriye Komiser olur ve artık koruma yapmaz."
+        },
+        "doctor": {
+            "name": "Doktor",
+            "letter": "D",
+            "desc": "Barışçıl rol. Her gece bir oyuncuyu iyileştirir (kendisini de iyileştirebilir). Mafya'nın saldırısından kurtarır. Aynı oyuncuyu arka arkaya iki kez iyileştiremez ve oyun boyunca bir oyuncuyu toplamda ikiden fazla kez iyileştiremez; bu kural kendisi için de geçerlidir. Manyak oyunda varsa Doktor ayrıca her gece bir oyuncunun Manyak olup olmadığını kontrol eder — yönetici bir tepki kartı gösterir. Elenirse rol Hemşire'ye geçer (eğer hayattaysa ve oyunda yer alıyorsa)."
+        },
+        "nurse": {
+            "name": "Hemşire",
+            "letter": "H",
+            "desc": "Barışçıl rol. Doktor ile birlikte uyanır ve onun seçimini görür. Doktor elenirse Hemşire Doktor olur — Manyak kontrolü de dahil. Kendini iyileştiremez; «arka arkaya iki kez» ve «oyun boyunca aynı oyuncuya en fazla iki kez» kuralları Doktor ile ortaktır."
+        },
+        "maniac": {
+            "name": "Manyak",
+            "letter": "M",
+            "desc": "Üçüncü taraf. Her gece kendisi dışında herhangi birini öldürebilir. Eskort'un etkisine karşı bağışıktır. Manyak, Eskort'a ya da Eskort'un birlikte olduğu oyuncuya saldırırsa ikisi de ölür. Masada biriyle baş başa kaldığında kazanır."
+        },
+        "escort": {
+            "name": "Eskort",
+            "letter": "E",
+            "desc": "Barışçıl rol. Her gece ilk uyanır. Bir oyuncuyla «geceyi geçirir»: o oyuncunun gece eylemi engellenir ve ona yönelik Mafya saldırısı yön değiştirir. Mafya üyesini seçerse — Mafya o gece kimseyi öldürmez, ancak Don yine de sorgulama yapar. Don'u seçerse — Don sorgulama yapamaz, fakat Mafya yine de ateş eder. Manyak üzerinde etkisi yoktur — Manyak saldırırsa ikisi de ölür."
+        },
+        "jester": {
+            "name": "Soytarı",
+            "letter": "S",
+            "desc": "Sivil rol; geceleri uyanmaz. Amacı: gündüz oylamasında siviller tarafından oyundan atılmak. Eğer atılırsa Soytarı tek başına kazanır. Gece öldürülürse yalnızca oyundan çıkar, kazanamaz."
+        },
+        "journalist": {
+            "name": "Gazeteci",
+            "letter": "G",
+            "desc": "Sivil rol. Geceleri Manyak'tan önce uyanır. İki oyuncu seçer: oyun yöneticisi onların aynı tarafta olup olmadığını söyler (ikisi de sivil ya da ikisi de Mafya) — hangisi olduğunu belirtmez."
+        }
+    },
+    "rules": {
+        "paragraphs": [
+            "<h3>Genel kurallar</h3>",
+            "Ekip, ekran paylaşımını ve katılımcı web kameralarını destekleyen ortak bir çevrimiçi odada toplanır. Ev sahibi hariç tüm oyuncuların web kamerası açık olmalıdır: ev sahibi kamera yerine bu aracı ekran paylaşımıyla gösterir. Kamerası olmayan bir oyuncu konuşma veya oy hakkı olmayan sessiz bir gözlemci olur. Oyun güvene dayanır: özel mesajlarda ipucu veya spoiler yok — yalnızca ortak görüşmede adil oyun. Rollerin kamera sırasına göre dağıtılabilmesi için katılımcı ızgarasının herkes için aynı görünmesi önerilir — bunun için <a href=\"https://vdo.ninja\" target=\"_blank\" rel=\"nofollow\">VDO.ninja</a>, <a href=\"https://butter.us\" target=\"_blank\" rel=\"nofollow\">Butter</a>, <a href=\"https://whereby.com\" target=\"_blank\" rel=\"nofollow\">Whereby</a>, <a href=\"https://zoom.us\" target=\"_blank\" rel=\"nofollow\">Zoom</a> ve benzeri konferans hizmetleri uygundur.",
+            "Oyuncu sayısı için ideal aralık <strong>8–24</strong> kişidir: sekizden az oyuncu sıkıcı olur, yirmi dörtten fazla ise çok gürültülü olur ve oyun saatler sürebilir. İsteğe bağlı roller grup büyüklüğüne göre seçilir: Devriye ve Hemşire genellikle 15'ten az oyuncu olduğunda kullanılmaz; Gazeteci ve Soytarı ise 20'den az oyuncu olduğunda eklenmez. Ancak denge her zaman grubun isteğine göre ayarlanabilir.",
+            "Atmosfer yaratmak için ilk oyuncu kısa bir hikâye uydurabilir: neredeyiz ve neden burada toplandık? Örneğin: ekip şirket gezisi için Sicilya'ya geldi — ve oyun da tam burada geçiyor. Hikâye ilk gün anlatılır ve bunun için biraz ekstra zaman ayrılabilir.",
+            "<hr>",
+            "<h3>İlk gece</h3>",
+            "Herkes gözlerini kapatır — maske, eller veya bir kâğıt parçası kullanılabilir; önemli olan dürüstlük ve bakmamaktır. Sunucu rolleri ekrandaki kamera sırasına göre dağıtır.",
+            "<hr>",
+            "<h3>İlk gün</h3>",
+            "Oyuncular gözlerini açar ve kendilerini tanıtır. İlk gün kimse elenmez — bu eğlenceli bir Mafya oturumu, rekabetçi bir turnuva değil.",
+            "<hr>",
+            "<h3>Gece</h3>",
+            "Herkes gözlerini kapatır. Oyun yöneticisi rolleri sırayla uyandırır: Eskort → Mafya ve Don → Komiser ve Devriye → Doktor ve Hemşire → Gazeteci → Manyak.",
+            "<hr>",
+            "<h3>Gün</h3>",
+            "Oyun yöneticisi gecenin sonuçlarını açıklar. İstenirse gece ölen oyuncu kısa bir son söz söyleyebilir. Ardından kısa bir tartışma yapılır ve oylama ile bir oyuncu elenir.",
+            "<hr>",
+            "<h3>Cezalar</h3>",
+            "Başka bir oyuncunun konuşmasını kesmek faul sayılır. Üç faul konuşma hakkını kaybettirir, dört faul ise oylamasız oyundan çıkarılmaya yol açar.",
+            "<hr>",
+            "<strong>Siviller kazanır</strong> — tüm Mafya <em>ve</em> Manyak elendiğinde. <strong>Mafya kazanır</strong> — Mafya sayısı sivillerle eşit ya da daha fazla olduğunda. <strong>Manyak kazanır</strong> — masada biriyle baş başa kaldığında. <strong>Soytarı kazanır</strong> — siviller tarafından oylamayla elendiğinde."
+        ],
+        "gameplayTitle": "Kurallar ve oyunun akışı",
+        "rolesTitle": "Rollerin kısa açıklaması",
+        "hostTitle": "Sunucu için",
+        "hostParagraphs": [
+            "<h3>Hazırlık</h3>",
+            "Oyuna başlamadan önce tüm oyuncuların web kameralarının açık ve net şekilde görünür olduğundan emin olun. Oyuncular yüzleri ve elleri kadrajda olacak şekilde oturmalıdır. Bu, gece fazı sırasında kurallara uyulmasını kontrol etmek için gereklidir. Kamerası olmayan bir oyuncu yalnızca konuşma ve oy kullanma hakkı olmadan gözlemci olarak katılabilir.",
+            "Video konferans ekranındaki oyuncu sırasını kontrol edin. Sıra katılımcılarda farklı görünüyorsa, rollerin hangi prensibe göre dağıtılacağını önceden kararlaştırın (örneğin sunucunun açıkladığı numaralandırmaya göre).",
+            "Oyun başlamadan önce:",
+            "<ul><li>oyuncu numaralarını duyurun;</li><li>her oyuncunun kendi numarasını hatırladığından emin olun;</li><li>bilgi rolleri için yanıt kartları hazırlayın («evet» / «hayır»);</li><li>gerekirse gece fazları için müzik hazırlayın;</li><li>ekran paylaşımını kontrol edin.</li></ul>",
+            "<hr>",
+            "<h3>Rollerin dağıtılması</h3>",
+            "İlk gece sırasında rolleri önceden kararlaştırılmış oyuncu sırasına göre dağıtın. Kartı yalnızca ilgili oyuncunun görebileceği şekilde gösterin. Rolü okumaları için birkaç saniye verin — bu özellikle yeni oyuncular için önemlidir.",
+            "Roller dağıtıldıktan sonra birbirini tanıması gereken grupları tanıştırın:",
+            "<ol><li>mafya ve don</li><li>komiser ve devriye</li><li>doktor ve hemşire</li></ol>",
+            "Her grup yalnızca tanışma süresi boyunca gözlerini açar.",
+            "<hr>",
+            "<h3>Gece fazı</h3>",
+            "Rolleri her gece aynı sırayla uyandırın — bu oyuncuların oyuna daha kolay uyum sağlamasına yardımcı olur:",
+            "<ol><li>escort</li><li>mafya ve don</li><li>komiser ve devriye</li><li>doktor ve hemşire</li><li>gazeteci</li><li>manyak</li></ol>",
+            "Oyuncular seçimlerini parmaklarıyla veya oyuncu numarasının yazılı olduğu bir kartla gösterir. Sunucu yapılan hareketleri kaydeder ve sözsüz ipuçları vermez.",
+            "<hr>",
+            "<h3>Gündüz fazı</h3>",
+            "Yalnızca gerçekleri duyurun:",
+            "<ul><li>gece kimin öldürüldüğünü;</li><li>kimse ölmediyse bunu belirtin.</li></ul>",
+            "Olanları yorumlamayın ve oyunculara ipucu vermeyin. Sunucu tarafsız kalmalıdır.",
+            "Zamanı kontrol edin:",
+            "<ul><li>oyuncu konuşması — en fazla <strong>1 dakika</strong>;</li><li>tartışma — takımın anlaşmasına göre;</li><li>oylama — aday gösterilen her oyuncu için sırayla yapılır.</li></ul>",
+            "<hr>",
+            "<h3>Kural denetimi</h3>",
+            "İhlalleri takip edin:",
+            "<ul><li>konuşan oyuncunun sözünü kesmek;</li><li>oyuncunun bilemeyeceği gece olaylarını tartışmak;</li><li>gece sırasında jest veya ipuçları vermek;</li><li>gözleri açmak veya etrafa bakmak.</li></ul>",
+            "Kurallara göre faul verin. Büyük masalarda konuşma süresini kontrol etmek özellikle önemlidir.",
+            "<hr>",
+            "<h3>Ana ilke</h3>",
+            "Sunucu <strong>oyunun hakemi ve yönetmenidir</strong>. Görevi oyunun temposunu korumak, kurallara uyulmasını sağlamak ve oyuncuların kararlarını etkilememektir.",
+            "Açık ve sakin bir yönetim oyunu herkes için daha keyifli hale getirir."
+        ]
+    },
+    "timer": {
+        "start": "Başlat",
+        "stop": "Durdur"
+    },
+    "reroll": {
+        "title": "Oyuncu sırasını karıştır"
+    }
+}
