@@ -1,0 +1,21 @@
+includes:
+  - vendor/spaze/phpstan-disallowed-calls/extension.neon
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+  level: 10
+  parallel:
+    jobSize: 20
+    maximumNumberOfProcesses: 20
+    minimumNumberOfJobsPerProcess: 2
+    processTimeout: 900.0
+  tmpDir: build-dev/shared_cache/phpstan
+  reportUnmatchedIgnoredErrors: false
+  fileExtensions:
+    - php
+  paths:
+    - ./
+  excludePaths:
+    - '*/.git/*'
+    - '*/build-dev/*'
+    - '*/node_modules/*'
+    - '*/vendor/*'

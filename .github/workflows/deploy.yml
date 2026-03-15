@@ -22,8 +22,12 @@ jobs:
           exclude: |
             **/.*
             **/.*/**
-            **/node_modules/**
-            **/tests/**
+            node_modules/**
+            tests/**
+            vendor/**
+            composer*
+            package*
+            phpstan.neon
             README.md
             CLAUDE.md
             LICENSE

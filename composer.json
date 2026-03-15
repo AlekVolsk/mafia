@@ -1,0 +1,32 @@
+{
+    "name": "alekvolsk/mafia",
+    "description": "Online role generator for Mafia / Werewolf party games. Free, no registration required.",
+    "type": "project",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Aleksey A. Morozov",
+            "email": "alekvolsk@gmail.com"
+        }
+    ],
+    "autoload-dev": {
+        "psr-4": {
+            "Mafia\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": [
+            "./vendor/bin/phpcs ./",
+            "./vendor/bin/phpstan analyse"
+        ],
+        "test": [
+            "php tests/tests.php"
+        ]
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "spaze/phpstan-disallowed-calls": "*"
+    }
+}

@@ -1,3 +1,8 @@
 CLAUDE.md
 .claude
 .vscode
+package-lock.json
+composer.lock
+/build-dev
+/node_modules
+/vendor

@@ -1,38 +1,71 @@
 {
-    "env"           : {
-        "es2021"  : true,
-        "browser" : true
+    "env": {
+        "es2021": true,
+        "browser": true
     },
-
-    "extends"       : [
-        "airbnb",
+    "extends": [
+        "airbnb-base",
         "eslint:recommended"
     ],
-
-    "globals"       : {},
-
-    "overrides"     : [],
-
-    "parserOptions" : {
-        "ecmaVersion" : "latest"
+    "globals": {},
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest"
     },
-
-    "rules"         : {
-        "indent"          : ["warn", 4],
-        "linebreak-style" : ["warn", "unix"],
-        "quotes"          : ["warn", "single", "avoid-escape"],
-        "semi"            : ["warn", "always"],
-        "eqeqeq"          : ["off"],
-        "no-plusplus"     : ["off"],
-        "camelcase"       : ["warn"],
-        "no-console"      : ["error", { "allow": ["clear", "warn", "error", "trace"] }],
-        "max-len"         : [
+    "rules": {
+        "indent": [
+            "warn",
+            4
+        ],
+        "linebreak-style": [
+            "warn",
+            "unix"
+        ],
+        "quotes": [
+            "warn",
+            "single",
+            "avoid-escape"
+        ],
+        "semi": [
+            "warn",
+            "always"
+        ],
+        "eqeqeq": [
+            "off"
+        ],
+        "no-plusplus": [
+            "off"
+        ],
+        "camelcase": [
+            "warn"
+        ],
+        "no-alert": [
+            "off"
+        ],
+        "no-console": [
             "error",
             {
-                "code"                 : 120,
-                "tabWidth"             : 4,
-                "ignorePattern"        : "data:image|^\\s*<.*>$",
-                "ignoreRegExpLiterals" : true
+                "allow": [
+                    "clear",
+                    "warn",
+                    "error",
+                    "trace"
+                ]
+            }
+        ],
+        "no-param-reassign": [
+            "error",
+            {
+                "props": false
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 120,
+                "tabWidth": 4,
+                "ignorePattern": "data:image|^\\s*<.*>$",
+                "ignoreRegExpLiterals": true
             }
         ]
     }

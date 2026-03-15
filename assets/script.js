@@ -1,19 +1,18 @@
-(function () {
-
+(function main() {
     // -------------------------------------------------------------------------
     // Constants
     // -------------------------------------------------------------------------
 
     const rolesDisplayOrder = [
         'peaceful', 'mafia', 'don', 'commissar', 'patrol',
-        'doctor', 'nurse', 'escort', 'jester', 'journalist', 'maniac'
+        'doctor', 'nurse', 'escort', 'jester', 'journalist', 'maniac',
     ];
 
     const langs = ['en', 'ru', 'es', 'de', 'fr', 'it', 'tr', 'pt', 'hi', 'he', 'ar', 'fa'];
 
-    const TIMER_DURATIONS      = [5, 30, 60, 120, 180]; // is seconds
-    const TIMER_DUR_LABELS     = ['5s', '30s', '1m', '2m', '3m'];
-    const TIMER_DEFAULT_INDEX  = 2; // 60s
+    const TIMER_DURATIONS = [5, 30, 60, 120, 180]; // is seconds
+    const TIMER_DUR_LABELS = ['5s', '30s', '1m', '2m', '3m'];
+    const TIMER_DEFAULT_INDEX = 2; // 60s
 
     // -------------------------------------------------------------------------
     // DOM references
@@ -58,7 +57,7 @@
         hi: document.getElementById('langBtnHi'),
         he: document.getElementById('langBtnHe'),
         ar: document.getElementById('langBtnAr'),
-        fa: document.getElementById('langBtnFa')
+        fa: document.getElementById('langBtnFa'),
     };
 
     // -------------------------------------------------------------------------
@@ -70,7 +69,7 @@
     let currentLang = 'en';
     let customBackImage = null;
 
-    let timerDuration  = TIMER_DURATIONS[TIMER_DEFAULT_INDEX];
+    let timerDuration = TIMER_DURATIONS[TIMER_DEFAULT_INDEX];
     let timerRemaining = TIMER_DURATIONS[TIMER_DEFAULT_INDEX];
     let dealtOnce = false;
 
@@ -85,7 +84,7 @@
     function t(key) {
         const parts = key.split('.');
         let val = locale;
-        parts.forEach(p => {
+        parts.forEach((p) => {
             if (val != null) val = val[p];
         });
         return val != null ? val : key;
@@ -114,54 +113,16 @@
 
     function detectBrowserLang() {
         try {
-            const list = (navigator.languages && navigator.languages.length)
-                ? navigator.languages
-                : (navigator.language ? [navigator.language] : []);
-            const candidates = list.map(l => String(l).slice(0, 2).toLowerCase());
-            return candidates.find(l => langs.includes(l)) || 'en';
+            let list;
+            if (navigator.languages && navigator.languages.length) {
+                list = navigator.languages;
+            } else {
+                list = navigator.language ? [navigator.language] : [];
+            }
+            const candidates = list.map((l) => String(l).slice(0, 2).toLowerCase());
+            return candidates.find((l) => langs.includes(l)) || 'en';
         } catch (e) {
             return 'en';
-        }
-    }
-
-    async function switchLang(lang) {
-        const data = await loadLocale(lang);
-        if (!data) return;
-        currentLang = lang;
-        localStorage.setItem('mafiaLang', lang);
-        locale = data;
-        applyTranslations();
-    }
-
-    function applyTranslations() {
-        roleMeta = locale.roleMeta;
-
-        document.documentElement.lang = currentLang;
-        document.documentElement.dir = t('meta.dir');
-        document.title = t('common.title');
-        document.getElementById('metaDescription').setAttribute('content', t('meta.metaDescription'));
-        document.getElementById('metaKeywords').setAttribute('content', t('meta.metaKeywords'));
-        document.getElementById('siteDesc').innerHTML = t('common.siteDesc');
-        document.getElementById('rolesNote').textContent = t('common.rolesNote');
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            el.textContent = t(el.dataset.i18n);
-        });
-
-        document.querySelectorAll('[data-i18n-role]').forEach(el => {
-            const key = el.dataset.i18nRole;
-            el.textContent = roleMeta[key] ? roleMeta[key].name : key;
-        });
-
-        langs.forEach(l => langBtns[l].classList.toggle('active', l === currentLang));
-
-        updateMafiaCount();
-        syncRevealBtn();
-        buildRules();
-        buildRolesList();
-
-        if (container.children.length > 0) {
-            rerenderCardLabels();
         }
     }
 
@@ -173,6 +134,32 @@
         const playerCount = parseInt(playerSlider.value, 10);
         const mafiaTotal = Math.floor(playerCount / 3.5);
         mafiaCountDisplay.textContent = fmt('common.mafiaCount', { n: mafiaTotal });
+    }
+
+    function syncRevealBtn() {
+        const isVisible = container.classList.contains('all-visible');
+        const icon = isVisible
+            ? '<svg viewBox="0 0 24 24"><use href="#icon-eye-off"/></svg>'
+            : '<svg viewBox="0 0 512 512"><use href="#icon-eye"/></svg>';
+        const label = isVisible ? t('common.hideAllBtn') : t('common.revealAllBtn');
+        revealAllBtn.innerHTML = `${icon}<span>${label}</span>`;
+    }
+
+    function buildRules() {
+        document.getElementById('btnGameplay').textContent = t('rules.gameplayTitle');
+        document.getElementById('btnRoles').textContent = t('rules.rolesTitle');
+        document.getElementById('btnHost').textContent = t('rules.hostTitle');
+    }
+
+    function buildRolesList() {}
+
+    function shuffleArray(arr) {
+        const result = arr.slice();
+        for (let i = result.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [result[i], result[j]] = [result[j], result[i]];
+        }
+        return result;
     }
 
     function getSelectedOptional() {
@@ -193,13 +180,14 @@
         const donPresent = mafiaTotal >= 1;
         const mafiaCount = donPresent ? mafiaTotal - 1 : 0;
 
-        let roles = [];
+        const roles = [];
         if (donPresent) roles.push('don');
         for (let i = 0; i < mafiaCount; i++) roles.push('mafia');
         roles.push('commissar');
         roles.push(...getSelectedOptional());
 
         if (roles.length > playerCount) {
+            // eslint-disable-next-line no-alert
             alert(fmt('common.alertTooManyRoles', { roles: roles.length, players: playerCount }));
             return null;
         }
@@ -210,17 +198,88 @@
         return shuffleArray(roles);
     }
 
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
     // -------------------------------------------------------------------------
     // Cards
     // -------------------------------------------------------------------------
+
+    function rerenderCardLabels() {
+        Array.from(container.children).forEach((card) => {
+            const meta = roleMeta[card.dataset.role] || { name: card.dataset.role, letter: '?' };
+            card.querySelector('.role-letter').textContent = meta.letter;
+            card.querySelector('.role-name').textContent = meta.name;
+        });
+    }
+
+    function applyTranslations() {
+        roleMeta = locale.roleMeta;
+
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = t('meta.dir');
+        document.title = t('common.title');
+        document.getElementById('metaDescription').setAttribute('content', t('meta.metaDescription'));
+        document.getElementById('metaKeywords').setAttribute('content', t('meta.metaKeywords'));
+        document.getElementById('siteDesc').innerHTML = t('common.siteDesc');
+        document.getElementById('rolesNote').textContent = t('common.rolesNote');
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+            el.textContent = t(el.dataset.i18n);
+        });
+
+        document.querySelectorAll('[data-i18n-role]').forEach((el) => {
+            const key = el.dataset.i18nRole;
+            el.textContent = roleMeta[key] ? roleMeta[key].name : key;
+        });
+
+        langs.forEach((l) => langBtns[l].classList.toggle('active', l === currentLang));
+
+        updateMafiaCount();
+        syncRevealBtn();
+        buildRules();
+        buildRolesList();
+
+        if (container.children.length > 0) {
+            rerenderCardLabels();
+        }
+    }
+
+    async function switchLang(lang) {
+        const data = await loadLocale(lang);
+        if (!data) return;
+        currentLang = lang;
+        localStorage.setItem('mafiaLang', lang);
+        locale = data;
+        applyTranslations();
+    }
+
+    // -------------------------------------------------------------------------
+    // Modal
+    // -------------------------------------------------------------------------
+
+    function showModal(card) {
+        const roleKey = card.dataset.role;
+        const meta = roleMeta[roleKey] || { name: '???', letter: '?', desc: '' };
+        const cardNumber = card.dataset.index !== undefined
+            ? parseInt(card.dataset.index, 10) + 1
+            : '';
+
+        modalCard.className = `modal-card ${roleKey}`;
+        modalCard.innerHTML = `
+            <div class="card-number">${cardNumber}</div>
+            <div class="role-letter">${meta.letter}</div>
+            <div class="role-name">${meta.name}</div>
+            <div class="role-desc">${meta.desc || ''}</div>
+        `;
+        modal.classList.add('active');
+    }
+
+    function onCardClick(event, card) {
+        event.stopPropagation();
+
+        if (card.classList.contains('seen') && !container.classList.contains('all-visible')) return;
+
+        showModal(card);
+        card.classList.add('seen');
+    }
 
     function renderCards(roles) {
         container.innerHTML = '';
@@ -256,36 +315,10 @@
         container.classList.remove('all-visible');
     }
 
-    function rerenderCardLabels() {
-        Array.from(container.children).forEach(card => {
-            const meta = roleMeta[card.dataset.role] || { name: card.dataset.role, letter: '?' };
-            card.querySelector('.role-letter').textContent = meta.letter;
-            card.querySelector('.role-name').textContent = meta.name;
-        });
-    }
-
-    function onCardClick(event, card) {
-        event.stopPropagation();
-
-        if (card.classList.contains('seen') && !container.classList.contains('all-visible')) return;
-
-        showModal(card);
-        card.classList.add('seen');
-    }
-
-    function syncRevealBtn() {
-        const isVisible = container.classList.contains('all-visible');
-        const icon = isVisible
-            ? '<svg viewBox="0 0 24 24"><use href="#icon-eye-off"/></svg>'
-            : '<svg viewBox="0 0 512 512"><use href="#icon-eye"/></svg>';
-        const label = isVisible ? t('common.hideAllBtn') : t('common.revealAllBtn');
-        revealAllBtn.innerHTML = `${icon}<span>${label}</span>`;
-    }
-
     function revealAll() {
         if (!container.children.length) return;
         container.classList.add('all-visible');
-        Array.from(container.children).forEach(card => {
+        Array.from(container.children).forEach((card) => {
             card.classList.add(card.dataset.role);
             card.classList.remove('back');
         });
@@ -293,101 +326,12 @@
     }
 
     function resetCardsToBack() {
-        Array.from(container.children).forEach(card => {
+        Array.from(container.children).forEach((card) => {
             card.classList.remove(card.dataset.role);
             card.classList.add('back');
         });
         container.classList.remove('all-visible');
         syncRevealBtn();
-    }
-
-    // -------------------------------------------------------------------------
-    // Modal
-    // -------------------------------------------------------------------------
-
-    function showModal(card) {
-        const roleKey = card.dataset.role;
-        const meta = roleMeta[roleKey] || { name: '???', letter: '?', desc: '' };
-        const cardNumber = card.dataset.index !== undefined ? parseInt(card.dataset.index) + 1 : '';
-
-        modalCard.className = `modal-card ${roleKey}`;
-        modalCard.innerHTML = `
-            <div class="card-number">${cardNumber}</div>
-            <div class="role-letter">${meta.letter}</div>
-            <div class="role-name">${meta.name}</div>
-            <div class="role-desc">${meta.desc || ''}</div>
-        `;
-        modal.classList.add('active');
-    }
-
-    function closeModal() {
-        if (timerRunning || timerRemaining !== timerDuration) {
-            timerStop(true);
-        }
-        modal.classList.remove('active');
-    }
-
-    function showRerollModal() {
-        const n = parseInt(playerSlider.value, 10);
-        const positions = Array.from({ length: n }, (_, i) => i + 1);
-        const shuffled = positions.slice();
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-
-        const rows = positions.map(old =>
-            `<tr><td>${old}</td><td class="reroll-arrow">→</td><td>${shuffled[old - 1]}</td></tr>`
-        ).join('');
-
-        modalCard.className = 'modal-card reroll-card';
-        modalCard.innerHTML = `
-            <div class="reroll-title">${t('reroll.title')}</div>
-            <table class="reroll-table"><tbody>${rows}</tbody></table>
-        `;
-        modal.classList.add('active');
-    }
-
-    function showReactionModal(type) {
-        modalCard.className = `modal-card reaction-card ${type}`;
-        modalCard.innerHTML = type === 'like'
-            ? '<svg viewBox="0 0 48 48"><use href="#icon-like"/></svg>'
-            : '<svg viewBox="0 0 24 24"><use href="#icon-dislike"/></svg>';
-        modal.classList.add('active');
-    }
-
-    function showTimerModal() {
-        timerRemaining = timerDuration;
-
-        modalCard.className = 'modal-card timer-card';
-        const durBtns = TIMER_DURATIONS.map((d, i) => {
-            const active = d === timerDuration ? ' active' : '';
-            return `<button class="timer-dur-btn${active}" data-dur="${d}">${TIMER_DUR_LABELS[i]}</button>`;
-        }).join('');
-
-        modalCard.innerHTML = `
-            <div class="timer-durations">${durBtns}</div>
-            <div class="timer-display">${timerFmt(timerDuration)}</div>
-            <button class="timer-start-btn">${t('timer.start')}</button>
-        `;
-
-        modalCard.querySelectorAll('.timer-dur-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (timerRunning) return;
-                timerDuration = parseInt(btn.dataset.dur, 10);
-                timerRemaining = timerDuration;
-                timerUpdateDisplay();
-                timerUpdateDurationBtns();
-            });
-        });
-
-        modalCard.querySelector('.timer-start-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            timerRunning ? timerStop(true) : timerStart();
-        });
-
-        modal.classList.add('active');
     }
 
     // -------------------------------------------------------------------------
@@ -409,7 +353,7 @@
     }
 
     function timerUpdateDurationBtns() {
-        modalCard.querySelectorAll('.timer-durations button').forEach(btn => {
+        modalCard.querySelectorAll('.timer-durations button').forEach((btn) => {
             btn.classList.toggle('active', parseInt(btn.dataset.dur, 10) === timerDuration);
             btn.disabled = timerRunning;
         });
@@ -450,22 +394,82 @@
         timerUpdateStartBtn();
     }
 
+    function closeModal() {
+        if (timerRunning || timerRemaining !== timerDuration) {
+            timerStop(true);
+        }
+        modal.classList.remove('active');
+    }
+
+    function showRerollModal() {
+        const n = parseInt(playerSlider.value, 10);
+        const positions = Array.from({ length: n }, (_, i) => i + 1);
+        const shuffled = shuffleArray(positions);
+
+        const rows = positions.map(
+            (old) => `<tr><td>${old}</td><td class="reroll-arrow">→</td><td>${shuffled[old - 1]}</td></tr>`,
+        ).join('');
+
+        modalCard.className = 'modal-card reroll-card';
+        modalCard.innerHTML = `
+            <div class="reroll-title">${t('reroll.title')}</div>
+            <table class="reroll-table"><tbody>${rows}</tbody></table>
+        `;
+        modal.classList.add('active');
+    }
+
+    function showReactionModal(type) {
+        modalCard.className = `modal-card reaction-card ${type}`;
+        modalCard.innerHTML = type === 'like'
+            ? '<svg viewBox="0 0 48 48"><use href="#icon-like"/></svg>'
+            : '<svg viewBox="0 0 24 24"><use href="#icon-dislike"/></svg>';
+        modal.classList.add('active');
+    }
+
+    function showTimerModal() {
+        timerRemaining = timerDuration;
+
+        modalCard.className = 'modal-card timer-card';
+        const durBtns = TIMER_DURATIONS.map((d, i) => {
+            const active = d === timerDuration ? ' active' : '';
+            return `<button class="timer-dur-btn${active}" data-dur="${d}">${TIMER_DUR_LABELS[i]}</button>`;
+        }).join('');
+
+        modalCard.innerHTML = `
+            <div class="timer-durations">${durBtns}</div>
+            <div class="timer-display">${timerFmt(timerDuration)}</div>
+            <button class="timer-start-btn">${t('timer.start')}</button>
+        `;
+
+        modalCard.querySelectorAll('.timer-dur-btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (timerRunning) return;
+                timerDuration = parseInt(btn.dataset.dur, 10);
+                timerRemaining = timerDuration;
+                timerUpdateDisplay();
+                timerUpdateDurationBtns();
+            });
+        });
+
+        modalCard.querySelector('.timer-start-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (timerRunning) {
+                timerStop(true);
+            } else {
+                timerStart();
+            }
+        });
+
+        modal.classList.add('active');
+    }
+
     // -------------------------------------------------------------------------
     // Custom card back
     // -------------------------------------------------------------------------
 
     function saveCustomBackToStorage(dataUrl) {
-        try { localStorage.setItem('mafiaCustomBack', dataUrl); } catch (e) { }
-    }
-
-    function loadCustomBackFromStorage() {
-        try {
-            const data = localStorage.getItem('mafiaCustomBack');
-            if (data) {
-                customBackImage = data;
-                applyBackImageToContainer();
-            }
-        } catch (e) { }
+        try { localStorage.setItem('mafiaCustomBack', dataUrl); } catch (e) { /* storage unavailable */ }
     }
 
     function applyBackImageToContainer() {
@@ -478,6 +482,16 @@
         }
     }
 
+    function loadCustomBackFromStorage() {
+        try {
+            const data = localStorage.getItem('mafiaCustomBack');
+            if (data) {
+                customBackImage = data;
+                applyBackImageToContainer();
+            }
+        } catch (e) { /* storage unavailable */ }
+    }
+
     function resetCustomBack() {
         customBackImage = null;
         localStorage.removeItem('mafiaCustomBack');
@@ -488,18 +502,10 @@
     // Rules and roles list
     // -------------------------------------------------------------------------
 
-    function buildRules() {
-        document.getElementById('btnGameplay').textContent = t('rules.gameplayTitle');
-        document.getElementById('btnRoles').textContent    = t('rules.rolesTitle');
-        document.getElementById('btnHost').textContent     = t('rules.hostTitle');
-    }
-
-    function buildRolesList() {}
-
     function renderRolesDl() {
         const dl = document.createElement('dl');
         dl.className = 'roles-dl';
-        rolesDisplayOrder.forEach(roleKey => {
+        rolesDisplayOrder.forEach((roleKey) => {
             const meta = roleMeta[roleKey];
             if (!meta) return;
             const dt = document.createElement('dt');
@@ -524,6 +530,13 @@
         document.getElementById('svgSprites').innerHTML = await r.text();
     }
 
+    function openDialog(title, html) {
+        dialogTitle.textContent = title;
+        dialogBody.innerHTML = html;
+        dialogCloseBtn.textContent = t('common.close');
+        appDialog.showModal();
+    }
+
     chkNurse.addEventListener('change', () => {
         if (chkNurse.checked) chkDoctor.checked = true;
     });
@@ -546,16 +559,21 @@
         }
     });
 
-    window.addEventListener('beforeunload', e => {
+    window.addEventListener('beforeunload', (e) => {
         if (dealtOnce) e.preventDefault();
     });
 
     revealAllBtn.addEventListener('click', () => {
         if (container.children.length === 0) {
+            // eslint-disable-next-line no-alert
             alert(t('common.alertDealFirst'));
             return;
         }
-        container.classList.contains('all-visible') ? resetCardsToBack() : revealAll();
+        if (container.classList.contains('all-visible')) {
+            resetCardsToBack();
+        } else {
+            revealAll();
+        }
     });
 
     resetAllBtn.addEventListener('click', () => {
@@ -604,21 +622,14 @@
         if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 
-    function openDialog(title, html) {
-        dialogTitle.textContent = title;
-        dialogBody.innerHTML = html;
-        dialogCloseBtn.textContent = t('common.close');
-        appDialog.showModal();
-    }
-
     dialogCloseBtn.addEventListener('click', () => appDialog.close());
 
-    appDialog.addEventListener('click', e => {
+    appDialog.addEventListener('click', (e) => {
         if (e.target === appDialog) appDialog.close();
     });
 
     document.getElementById('btnGameplay').addEventListener('click', () => {
-        const html = (locale.rules.paragraphs || []).map(p => `<p>${p}</p>`).join('');
+        const html = (locale.rules.paragraphs || []).map((p) => `<p>${p}</p>`).join('');
         openDialog(t('rules.gameplayTitle'), html);
     });
 
@@ -627,11 +638,11 @@
     });
 
     document.getElementById('btnHost').addEventListener('click', () => {
-        const html = (locale.rules.hostParagraphs || []).map(p => `<p>${p}</p>`).join('');
+        const html = (locale.rules.hostParagraphs || []).map((p) => `<p>${p}</p>`).join('');
         openDialog(t('rules.hostTitle'), html);
     });
 
-    langs.forEach(l => langBtns[l].addEventListener('click', () => switchLang(l)));
+    langs.forEach((l) => langBtns[l].addEventListener('click', () => switchLang(l)));
 
     window.locales = {};
 
@@ -640,8 +651,8 @@
         const preferred = (saved && langs.includes(saved)) ? saved : detectBrowserLang();
 
         const [data] = await Promise.all([
-            loadLocale(preferred).then(d => d || loadLocale('en')),
-            loadSprites()
+            loadLocale(preferred).then((d) => d || loadLocale('en')),
+            loadSprites(),
         ]);
 
         currentLang = window.locales[preferred] ? preferred : 'en';
@@ -656,5 +667,4 @@
         preloader.style.pointerEvents = 'none';
         setTimeout(() => preloader.remove(), 400);
     });
-
-})();
+}());

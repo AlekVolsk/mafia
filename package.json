@@ -1,0 +1,26 @@
+{
+    "name": "mafia",
+    "version": "1.0.0",
+    "description": "Online role generator for Mafia / Werewolf party games. Free, no registration required.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AlekVolsk/mafia.git"
+    },
+    "keywords": [],
+    "author": "Aleksey A. Morozov",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/AlekVolsk/mafia/issues"
+    },
+    "homepage": "https://github.com/AlekVolsk/mafia#readme",
+    "scripts": {
+        "lint": "./node_modules/.bin/eslint ./assets/"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "eslint": "^8.57.1",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.32.0",
+        "globals": "^17.4.0"
+    }
+}
