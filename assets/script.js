@@ -1,19 +1,8 @@
 (function () {
 
-    /**
-     * @todo
-     * - правила для ведущего
-     * - все описания - в отдельные диалоги
-     */
-
     // -------------------------------------------------------------------------
-    // Константы
+    // Constants
     // -------------------------------------------------------------------------
-
-    const rolePool = {
-        mandatory: ['mafia', 'don', 'commissar'],
-        optional: ['patrol', 'doctor', 'nurse', 'maniac', 'escort', 'jester', 'journalist']
-    };
 
     const rolesDisplayOrder = [
         'peaceful', 'mafia', 'don', 'commissar', 'patrol',
@@ -22,12 +11,12 @@
 
     const langs = ['en', 'ru', 'es', 'de', 'fr', 'it', 'tr', 'pt', 'hi', 'he', 'ar', 'fa'];
 
-    const TIMER_DURATIONS      = [5, 30, 60, 120, 180];
+    const TIMER_DURATIONS      = [5, 30, 60, 120, 180]; // is seconds
     const TIMER_DUR_LABELS     = ['5s', '30s', '1m', '2m', '3m'];
     const TIMER_DEFAULT_INDEX  = 2; // 60s
 
     // -------------------------------------------------------------------------
-    // DOM-ссылки
+    // DOM references
     // -------------------------------------------------------------------------
 
     const playerSlider = document.getElementById('playerSlider');
@@ -73,7 +62,7 @@
     };
 
     // -------------------------------------------------------------------------
-    // Состояние
+    // State
     // -------------------------------------------------------------------------
 
     let locale = null;
@@ -96,28 +85,27 @@
     function t(key) {
         const parts = key.split('.');
         let val = locale;
-        for (const p of parts) {
-            if (val == null) return key;
-            val = val[p];
-        }
+        parts.forEach(p => {
+            if (val != null) val = val[p];
+        });
         return val != null ? val : key;
     }
 
     function fmt(key, vars) {
         let str = t(key);
-        for (const [k, v] of Object.entries(vars)) {
-            str = str.replace('{' + k + '}', v);
-        }
+        Object.entries(vars).forEach(([k, v]) => {
+            str = str.replace(`{${k}}`, v);
+        });
         return str;
     }
 
     async function loadLocale(lang) {
-        if (window._locales[lang]) return window._locales[lang];
+        if (window.locales[lang]) return window.locales[lang];
         try {
             const r = await fetch(`lang/${lang}.json?v=${Date.now()}`);
             if (!r.ok) throw new Error(r.status);
             const data = await r.json();
-            window._locales[lang] = data;
+            window.locales[lang] = data;
             return data;
         } catch (e) {
             return null;
@@ -178,7 +166,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Игровая логика
+    // Game logic
     // -------------------------------------------------------------------------
 
     function updateMafiaCount() {
@@ -231,7 +219,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Карточки
+    // Cards
     // -------------------------------------------------------------------------
 
     function renderCards(roles) {
@@ -290,7 +278,8 @@
         const icon = isVisible
             ? '<svg viewBox="0 0 24 24"><use href="#icon-eye-off"/></svg>'
             : '<svg viewBox="0 0 512 512"><use href="#icon-eye"/></svg>';
-        revealAllBtn.innerHTML = icon + '<span>' + (isVisible ? t('common.hideAllBtn') : t('common.revealAllBtn')) + '</span>';
+        const label = isVisible ? t('common.hideAllBtn') : t('common.revealAllBtn');
+        revealAllBtn.innerHTML = `${icon}<span>${label}</span>`;
     }
 
     function revealAll() {
@@ -313,7 +302,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Модальное окно
+    // Modal
     // -------------------------------------------------------------------------
 
     function showModal(card) {
@@ -321,7 +310,7 @@
         const meta = roleMeta[roleKey] || { name: '???', letter: '?', desc: '' };
         const cardNumber = card.dataset.index !== undefined ? parseInt(card.dataset.index) + 1 : '';
 
-        modalCard.className = 'modal-card ' + roleKey;
+        modalCard.className = `modal-card ${roleKey}`;
         modalCard.innerHTML = `
             <div class="card-number">${cardNumber}</div>
             <div class="role-letter">${meta.letter}</div>
@@ -360,7 +349,7 @@
     }
 
     function showReactionModal(type) {
-        modalCard.className = 'modal-card reaction-card ' + type;
+        modalCard.className = `modal-card reaction-card ${type}`;
         modalCard.innerHTML = type === 'like'
             ? '<svg viewBox="0 0 48 48"><use href="#icon-like"/></svg>'
             : '<svg viewBox="0 0 24 24"><use href="#icon-dislike"/></svg>';
@@ -371,9 +360,10 @@
         timerRemaining = timerDuration;
 
         modalCard.className = 'modal-card timer-card';
-        const durBtns = TIMER_DURATIONS.map((d, i) =>
-            `<button class="timer-dur-btn${d === timerDuration ? ' active' : ''}" data-dur="${d}">${TIMER_DUR_LABELS[i]}</button>`
-        ).join('');
+        const durBtns = TIMER_DURATIONS.map((d, i) => {
+            const active = d === timerDuration ? ' active' : '';
+            return `<button class="timer-dur-btn${active}" data-dur="${d}">${TIMER_DUR_LABELS[i]}</button>`;
+        }).join('');
 
         modalCard.innerHTML = `
             <div class="timer-durations">${durBtns}</div>
@@ -401,13 +391,13 @@
     }
 
     // -------------------------------------------------------------------------
-    // Таймер
+    // Timer
     // -------------------------------------------------------------------------
 
     function timerFmt(sec) {
         const m = Math.floor(sec / 60);
         const s = sec % 60;
-        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
 
     function timerUpdateDisplay() {
@@ -431,13 +421,13 @@
         btn.textContent = timerRunning ? t('timer.stop') : t('timer.start');
     }
 
-    function timerStop(reset) {
+    function timerStop(doReset) {
         if (timerIntervalId !== null) {
             clearInterval(timerIntervalId);
             timerIntervalId = null;
         }
         timerRunning = false;
-        if (reset) timerRemaining = timerDuration;
+        if (doReset) timerRemaining = timerDuration;
         timerUpdateDisplay();
         timerUpdateDurationBtns();
         timerUpdateStartBtn();
@@ -461,7 +451,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Кастомный фон карточек
+    // Custom card back
     // -------------------------------------------------------------------------
 
     function saveCustomBackToStorage(dataUrl) {
@@ -495,7 +485,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Правила и список ролей
+    // Rules and roles list
     // -------------------------------------------------------------------------
 
     function buildRules() {
@@ -514,9 +504,9 @@
             if (!meta) return;
             const dt = document.createElement('dt');
             const dot = document.createElement('span');
-            dot.className = 'role-dot ' + roleKey;
+            dot.className = `role-dot ${roleKey}`;
             dt.appendChild(dot);
-            dt.appendChild(document.createTextNode(' ' + meta.name));
+            dt.appendChild(document.createTextNode(` ${meta.name}`));
             const dd = document.createElement('dd');
             dd.textContent = meta.desc || '';
             dl.appendChild(dt);
@@ -526,15 +516,13 @@
     }
 
     // -------------------------------------------------------------------------
-    // Инициализация и события
+    // Init and events
     // -------------------------------------------------------------------------
 
     async function loadSprites() {
         const r = await fetch(`assets/sprites.svg?v=${Date.now()}`);
         document.getElementById('svgSprites').innerHTML = await r.text();
     }
-
-    // Настройки
 
     chkNurse.addEventListener('change', () => {
         if (chkNurse.checked) chkDoctor.checked = true;
@@ -548,8 +536,6 @@
         playerCountValue.textContent = playerSlider.value;
         updateMafiaCount();
     });
-
-    // Кнопки управления
 
     dealBtn.addEventListener('click', () => {
         const roles = generateRoles();
@@ -595,10 +581,8 @@
     dislikeBtn.addEventListener('click', () => showReactionModal('dislike'));
     timerBtn.addEventListener('click', () => showTimerModal());
 
-    // Загрузка фона
-
     backImageUpload.addEventListener('change', (e) => {
-        const file = e.target.files[0];
+        const [file] = e.target.files;
         if (file) {
             const reader = new FileReader();
             reader.onload = (ev) => {
@@ -612,8 +596,6 @@
 
     resetBackBtn.addEventListener('click', resetCustomBack);
 
-    // Модальное окно
-
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
@@ -621,8 +603,6 @@
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
-
-    // Диалог
 
     function openDialog(title, html) {
         dialogTitle.textContent = title;
@@ -651,13 +631,9 @@
         openDialog(t('rules.hostTitle'), html);
     });
 
-    // Язык
-
     langs.forEach(l => langBtns[l].addEventListener('click', () => switchLang(l)));
 
-    // Загрузка при старте
-
-    window._locales = {};
+    window.locales = {};
 
     window.addEventListener('load', async () => {
         const saved = localStorage.getItem('mafiaLang');
@@ -668,7 +644,7 @@
             loadSprites()
         ]);
 
-        currentLang = window._locales[preferred] ? preferred : 'en';
+        currentLang = window.locales[preferred] ? preferred : 'en';
         locale = data;
         applyTranslations();
         loadCustomBackFromStorage();

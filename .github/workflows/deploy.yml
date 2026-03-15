@@ -20,11 +20,10 @@ jobs:
           server-dir: /www/alekvolsk.info/mafia/
           local-dir: ./
           exclude: |
-            **/.git*
-            **/.git*/**
+            **/.*
+            **/.*/**
             **/node_modules/**
             **/tests/**
             README.md
-            .gitignore
             CLAUDE.md
             LICENSE
