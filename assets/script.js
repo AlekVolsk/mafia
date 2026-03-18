@@ -535,8 +535,8 @@
         dialogTitle.textContent = title;
         dialogBody.innerHTML = html;
         dialogCloseBtn.textContent = t('common.close');
-        dialogBody.scrollTop = 0;
         appDialog.showModal();
+        dialogBody.scrollTop = 0;
     }
 
     chkNurse.addEventListener('change', () => {
