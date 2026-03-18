@@ -159,6 +159,7 @@
             <button class="rules-btn" id="btnGameplay"></button>
             <button class="rules-btn" id="btnRoles"></button>
             <button class="rules-btn" id="btnHost"></button>
+            <button class="rules-btn" id="btnHistory"></button>
         </div>
 
         <div class="footer-c">

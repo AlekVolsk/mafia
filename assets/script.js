@@ -149,6 +149,7 @@
         document.getElementById('btnGameplay').textContent = t('rules.gameplayTitle');
         document.getElementById('btnRoles').textContent = t('rules.rolesTitle');
         document.getElementById('btnHost').textContent = t('rules.hostTitle');
+        document.getElementById('btnHistory').textContent = t('rules.historyTitle');
     }
 
     function buildRolesList() {}
@@ -640,6 +641,11 @@
     document.getElementById('btnHost').addEventListener('click', () => {
         const html = (locale.rules.hostParagraphs || []).map((p) => `<p>${p}</p>`).join('');
         openDialog(t('rules.hostTitle'), html);
+    });
+
+    document.getElementById('btnHistory').addEventListener('click', () => {
+        const html = (locale.rules.historyParagraphs || []).map((p) => `<p>${p}</p>`).join('');
+        openDialog(t('rules.historyTitle'), html);
     });
 
     langs.forEach((l) => langBtns[l].addEventListener('click', () => switchLang(l)));

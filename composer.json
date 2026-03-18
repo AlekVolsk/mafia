@@ -16,6 +16,7 @@
     },
     "scripts": {
         "lint": [
+            "./node_modules/.bin/eslint ./assets",
             "./vendor/bin/phpcs ./",
             "./vendor/bin/phpstan analyse"
         ],
